@@ -1,0 +1,238 @@
+{
+  "vendors": [
+    {
+      "id": "vip",
+      "name": "FlipZone - VIP Grupa",
+      "description": "Pristup grupi i svim dobavljačima.",
+      "price": "50€",
+      "category": "ostalo",
+      "image": "logo.png",
+      "stripeLink": "https://buy.stripe.com/6oUcN57FO7cm4lefmK8k802"
+    },
+    {
+      "id": "airpods",
+      "name": "AirPods Pro Vendor",
+      "description": "Pristup provjerenom dobavljaču AirPods Pro.",
+      "price": "5.99€",
+      "category": "elektronika",
+      "image": "slike/dobavljaci/airpods.png",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "applewatch",
+      "name": "Apple Watch Vendor",
+      "description": "Serija 7/8/Ultra dobavljač.",
+      "price": "5.99€",
+      "category": "satovi",
+      "image": "slike/dobavljaci/satap.png",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "iphone",
+      "name": "iPhone Vendor",
+      "description": "Novi i obnovljeni modeli.",
+      "price": "5.99€",
+      "category": "elektronika",
+      "image": "slike/dobavljaci/iphone.png",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "ps5",
+      "name": "PS5 Vendor",
+      "description": "Konzole i kontroleri.",
+      "price": "5.99€",
+      "category": "elektronika",
+      "image": "slike/dobavljaci/ps5.png",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "nintendoswitch",
+      "name": "Nintendo Switch Vendor",
+      "description": "OLED i Lite verzije",
+      "price": "5.99€",
+      "category": "elektronika",
+      "image": "slike/dobavljaci/nt.png",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "smartwatch",
+      "name": "Smartwatch Vendor",
+      "description": "Samsung, Garmin i drugi",
+      "price": "5.99€",
+      "category": "satovi",
+      "image": "slike/dobavljaci/Smartwatch.png",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "niketn",
+      "name": "Nike TN Vendor",
+      "description": "Popularne TN-ice, razne boje.",
+      "price": "5.99€",
+      "category": "obuca",
+      "image": "slike/dobavljaci/niketn.png",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "nikeairforce1",
+      "name": "Nike Air Force 1 Vendor",
+      "description": "Klasične i custom varijante",
+      "price": "5.99€",
+      "category": "obuca",
+      "image": "slike/dobavljaci/force.png",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "adidasyeezy",
+      "name": "Adidas Yeezy Vendor",
+      "description": "350, 700, Slide",
+      "price": "5.99€",
+      "category": "obuca",
+      "image": "slike/dobavljaci/Adidas-Yeezy-Boost-350-V2-Oreo-wethenew1.webp",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "jordan1",
+      "name": "Jordan 1 Vendor",
+      "description": "High, Mid i Low modeli",
+      "price": "5.99€",
+      "category": "obuca",
+      "image": "slike/dobavljaci/air-jordan-1-retro-chicago-release-date.avif",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "newbalance",
+      "name": "New Balance Vendor",
+      "description": "550, 990 i hype modeli",
+      "price": "5.99€",
+      "category": "obuca",
+      "image": "slike/dobavljaci/pngimg.com - running_shoes_PNG5792.png",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "dunklow",
+      "name": "Dunk Low Vendor",
+      "description": "Nike Dunk Low modeli",
+      "price": "5.99€",
+      "category": "obuca",
+      "image": "slike/dobavljaci/NIKE+DUNK+LOW+RETRO.png",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "techfleece",
+      "name": "Nike Tech Fleece Vendor",
+      "description": "Trenirka setovi.",
+      "price": "5.99€",
+      "category": "odjeca",
+      "image": "slike/dobavljaci/NikeSportswearTechFleeceWindrunnerFull-ZipHoodieLightGreyFrontLodzPolskaNHype.webp",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "puff",
+      "name": "Puff Vendor",
+      "description": "Razne vrste puffova",
+      "price": "5.99€",
+      "category": "ostalo",
+      "image": "slike/dobavljaci/ivg-smart-5500-banana-ice_63ebd95a-d19a-4aae-a787-f4d3aa9569af.webp",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "jbl",
+      "name": "JBL Speaker Vendor",
+      "description": "Bluetooth zvučnici raznih modela.",
+      "price": "5.99€",
+      "category": "elektronika",
+      "image": "slike/dobavljaci/JBL-Audio-Speakers-Transparent-PNG.png",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "moncler",
+      "name": "Moncler Jacket Vendor",
+      "description": "Jakne i zimska odjeća.",
+      "price": "5.99€",
+      "category": "odjeca",
+      "image": "slike/dobavljaci/erasebg-transformed.png",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "stoneisland",
+      "name": "Stone Island Vendor",
+      "description": "Majice, jakne, duksevi",
+      "price": "5.99€",
+      "category": "odjeca",
+      "image": "slike/dobavljaci/Blue_T_Shirt_PNG_Clipart-2346.png",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "thenorthface",
+      "name": "The North Face Vendor",
+      "description": "Retro Nuptse i puffer jakne",
+      "price": "5.99€",
+      "category": "odjeca",
+      "image": "slike/dobavljaci/The_North_Face.png",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "palmangels",
+      "name": "Palm Angels Vendor",
+      "description": "Majice i duksevi",
+      "price": "5.99€",
+      "category": "odjeca",
+      "image": "slike/dobavljaci/erasebg-transformed.webp",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "rolex",
+      "name": "Rolex Vendor",
+      "description": "Submariner, Datejust modeli.",
+      "price": "5.99€",
+      "category": "satovi",
+      "image": "slike/dobavljaci/Rolex-PNG-Pic.png",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "casiogshock",
+      "name": "Casio G-Shock Vendor",
+      "description": "Limitirane serije",
+      "price": "5.99€",
+      "category": "satovi",
+      "image": "slike/dobavljaci/GA-2140RE-1AER.png",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "pandora",
+      "name": "Pandora Jewelry Vendor",
+      "description": "Narukvice i privesci",
+      "price": "5.99€",
+      "category": "ostalo",
+      "image": "slike/dobavljaci/53226-pandora-naramok-puzzle-piece-hearts-friendship-m-590728-792239c01.png",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "supreme",
+      "name": "Supreme Accessories Vendor",
+      "description": "Torbe, novčanici, kape",
+      "price": "5.99€",
+      "category": "ostalo",
+      "image": "slike/dobavljaci/Supreme-Logo.png",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "offwhite",
+      "name": "Off-White Vendor",
+      "description": "Kaiševi, majice, hoodies",
+      "price": "5.99€",
+      "category": "odjeca",
+      "image": "slike/dobavljaci/Off-White-Emblem.png",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    },
+    {
+      "id": "luxuryperfume",
+      "name": "Luxury Perfume Vendor",
+      "description": "Dior Sauvage, Creed Aventus i sl.",
+      "price": "5.99€",
+      "category": "ostalo",
+      "image": "slike/dobavljaci/eros_parfum_100ml-removebg-preview-1.png",
+      "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
+    }
+  ]
+}
