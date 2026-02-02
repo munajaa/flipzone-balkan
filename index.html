@@ -496,7 +496,7 @@
           </div>
 
           <!-- Lightbox Modal -->
-          <div id="lightboxModal" class="hidden fixed inset-0 z-[100] bg-brandBg/95 backdrop-blur-2xl flex items-center justify-center p-6 animate-fade-in" onclick="if(event.target === this) closeLightbox();">
+          <div id="lightboxModal" class="hidden fixed inset-0 z-[100] bg-brandBg/95 backdrop-blur-2xl flex items-center justify-center p-6 animate-fade-in" role="dialog" aria-modal="true" onclick="if(event.target === this) closeLightbox();">
             <div class="relative max-w-2xl w-full max-h-[80vh] flex items-center justify-center" onclick="event.stopPropagation()">
               <img id="lightboxImage" src="" class="max-w-full max-h-[75vh] object-contain rounded-[2.5rem] shadow-[0_0_100px_rgba(0,0,0,0.8)]" alt="Slika" />
               <button class="absolute top-4 right-4 sm:-top-12 sm:-right-12 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-accent1 text-brandBg flex items-center justify-center text-3xl hover:bg-accent2 transition-all duration-300 shadow-lg hover:scale-110 font-black" onclick="closeLightbox();" title="Zatvori (ESC)">
@@ -506,8 +506,8 @@
           </div>
 
           <!-- Checkout Modal -->
-          <div id="checkoutModal" class="hidden fixed inset-0 z-[101] bg-brandBg/95 backdrop-blur-2xl flex items-center justify-center p-6 animate-fade-in" onclick="if(event.target === this) closeCheckout();">
-            <div class="relative w-full max-w-md max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
+          <div id="checkoutModal" class="hidden fixed inset-0 z-[101] bg-brandBg/95 backdrop-blur-2xl grid place-items-center p-4 sm:p-6 animate-fade-in" role="dialog" aria-modal="true" onclick="if(event.target === this) closeCheckout();">
+            <div class="relative w-full max-w-md mx-auto max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-3rem)] overflow-y-auto" onclick="event.stopPropagation()">
               <div class="glass rounded-[2.5rem] border border-white/10 p-8 space-y-6">
                 <!-- Close Button -->
                 <button onclick="closeCheckout();" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-white transition-all">
