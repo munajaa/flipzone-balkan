@@ -231,7 +231,37 @@
       #checkoutPrice { font-size: 1.95rem !important; }
     }
 
-  </style>
+  
+
+    /* === Checkout: force true center + prevent mobile auto-zoom/oversize === */
+    body.modal-open { overflow: hidden !important; height: 100dvh !important; }
+
+    #checkoutModal.hidden { display: none !important; }
+
+    #checkoutModal:not(.hidden) {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 12px !important;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    #checkoutModal > div {
+      width: 100% !important;
+      max-width: 420px !important;
+      max-height: 92dvh !important;
+      overflow-y: auto !important;
+    }
+
+    /* iOS Safari: prevent input-focus zoom (safe even if you add inputs later) */
+    #checkoutModal input,
+    #checkoutModal select,
+    #checkoutModal textarea,
+    #checkoutModal button {
+      font-size: 16px;
+    }
+</style>
 </head>
 <body>
   <div class="min-h-screen font-sans selection:bg-accent1 selection:text-brandBg">
@@ -274,7 +304,7 @@
               <span class="text-[10px] font-black uppercase tracking-[0.2em] text-accent1">Aktivni korisnici: 256</span>
             </div>
             
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black leading-[1] tracking-tighter">
+            <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-7xl font-black leading-[0.95] tracking-tighter">
               FlipZone <br />
               <span class="text-gradient italic hero-animate delay-0">Reselling</span>
             </h1>
@@ -284,10 +314,10 @@
             </p>
             
             <div class="flex flex-wrap gap-4">
-              <a href="#pricing" class="px-6 py-3 md:px-8 md:py-4 rounded-xl bg-brand-gradient text-brandBg font-black text-sm md:text-base hover:shadow-[0_18px_36px_rgba(110,231,183,0.18)] hover:-translate-y-0.5 transition-all hero-animate delay-200 hero-cta-animate">
+              <a href="#pricing" class="w-full sm:w-auto px-7 py-4 md:px-9 md:py-4 rounded-2xl bg-brand-gradient text-brandBg font-black text-base md:text-base hover:shadow-[0_18px_36px_rgba(110,231,183,0.18)] hover:-translate-y-0.5 transition-all hero-animate delay-200 hero-cta-animate">
                 Započni Edukaciju
               </a>
-              <button class="px-6 py-3 md:px-8 md:py-4 rounded-xl glass hero-cta-outline hero-cta-small font-black text-sm md:text-base hover:bg-white/8 transition-all flex items-center gap-3 hero-animate delay-300 hero-cta-animate" onclick="alert('Demo video sekcija')">
+              <button class="w-full sm:w-auto px-7 py-4 md:px-9 md:py-4 rounded-2xl glass hero-cta-outline hero-cta-small font-black text-base md:text-base hover:bg-white/8 transition-all flex items-center justify-center gap-3 hero-animate delay-300 hero-cta-animate" onclick="alert('Demo video sekcija')">
                 <i class="fa-solid fa-circle-play text-accent2"></i>
                 Besplatan Demo
               </button>
@@ -561,8 +591,8 @@
           </div>
 
           <!-- Checkout Modal -->
-          <div id="checkoutModal" class="hidden fixed inset-0 z-[101] bg-brandBg/95 backdrop-blur-2xl grid place-items-center p-4 sm:p-6 animate-fade-in" role="dialog" aria-modal="true" onclick="if(event.target === this) closeCheckout();">
-            <div class="relative w-full max-w-md mx-auto max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-3rem)] overflow-y-auto" onclick="event.stopPropagation()">
+          <div id="checkoutModal" class="hidden fixed inset-0 z-[101] bg-brandBg/95 backdrop-blur-2xl flex items-center justify-center p-4 sm:p-6 animate-fade-in" role="dialog" aria-modal="true" onclick="if(event.target === this) closeCheckout();">
+            <div class="relative w-full max-w-md mx-auto overflow-y-auto" style="max-height:92dvh" onclick="event.stopPropagation()">
               <div class="glass rounded-[2.5rem] border border-white/10 p-8 space-y-6">
                 <!-- Close Button -->
                 <button onclick="closeCheckout();" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-white transition-all">
@@ -1258,12 +1288,14 @@
       currentCheckoutLink = stripeLink;
       modal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
+      document.body.classList.add('modal-open');
     }
 
     function closeCheckout() {
       const modal = document.getElementById('checkoutModal');
       modal.classList.add('hidden');
       document.body.style.overflow = 'auto';
+      document.body.classList.remove('modal-open');
     }
 
     function processCheckout() {
