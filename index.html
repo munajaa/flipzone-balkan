@@ -176,45 +176,59 @@
       .hero-blob-small { display: none; }
       .hero-preview-card { display: none; }
     }
-  
-    /* === Mobile-first layout fixes (no zoom needed) === */
-    .safe-wrap { max-width: 100%; overflow-wrap: anywhere; }
-    .tap { -webkit-tap-highlight-color: transparent; }
 
-    /* Products: ALWAYS 3 per row (as requested) */
-    #products-grid{
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      align-items: stretch;
+
+    /* --- Mobile readability (no design change, just scaling) --- */
+    /* Prevent horizontal overflow from long words/URLs */
+    * { min-width: 0; }
+    body { text-rendering: optimizeLegibility; }
+
+    /* Keep overall layout comfortable on small screens */
+    @media (max-width: 480px) {
+      /* Reduce overly large tailwind paddings on mobile */
+      .p-10 { padding: 1.5rem !important; }
+      .p-8  { padding: 1.25rem !important; }
+      .p-6  { padding: 1rem !important; }
+      .px-5 { padding-left: 1rem !important; padding-right: 1rem !important; }
+      .px-6 { padding-left: 1rem !important; padding-right: 1rem !important; }
+      .py-2 { padding-top: .45rem !important; padding-bottom: .45rem !important; }
+      .gap-16 { gap: 2rem !important; }
+      .space-y-10 > :not([hidden]) ~ :not([hidden]) { margin-top: 2rem !important; }
+
+      /* Make long headings readable without forcing zoom */
+      h1, h2, h3 { word-break: break-word; }
+
+      /* Buttons: keep same style, just smaller typography so they fit */
+      .text-lg { font-size: 1rem !important; }
+      .tracking-widest { letter-spacing: .12em !important; }
+
+      /* Checkout modal: ensure it never feels "bigger than screen" */
+      #checkoutModal { padding: 0.75rem !important; }
+      #checkoutModal > div { max-height: calc(100vh - 1.5rem) !important; }
+      #checkoutModal .glass { padding: 1.25rem !important; border-radius: 1.75rem !important; }
+      #checkoutTitle { font-size: 1.25rem !important; line-height: 1.2 !important; }
+      #checkoutPrice { font-size: 2.1rem !important; line-height: 1.1 !important; }
+      #totalPrice { font-size: 1.4rem !important; line-height: 1.1 !important; }
+      #checkoutDesc { font-size: 0.95rem !important; }
+      #checkoutBtn { padding-top: 0.95rem !important; padding-bottom: 0.95rem !important; font-size: 1rem !important; }
+
+      /* Lightbox: keep centered and within screen */
+      #lightboxModal { padding: 0.75rem !important; }
+      #lightboxModal img { max-height: 72vh !important; }
+
+      /* Testimonials cards min widths: avoid needing horizontal zoom */
+      .min-w-\[340px\] { min-width: 290px !important; }
+      .md\:min-w-\[420px\] { min-width: 290px !important; }
+
+      /* Inputs/radios: prevent awkward scaling */
+      input, select, textarea { font-size: 16px; }
     }
-    #products-grid > div{ min-width: 0; }
-    #products-grid img{ max-width: 100%; height: auto; }
 
-    @media (max-width: 640px){
-      /* Reduce large paddings so everything fits without zoom */
-      .p-10{ padding: 1.5rem !important; }
-      .p-8{ padding: 1.25rem !important; }
-      .px-4{ padding-left: 1rem !important; padding-right: 1rem !important; }
-
-      /* Product cards compact on phones (3-up grid needs this) */
-      #products-grid{ gap: .75rem !important; }
-      #products-grid .glass{ padding: .75rem !important; border-radius: 1.5rem !important; }
-      #products-grid .aspect-square{ border-radius: 1.15rem !important; margin-bottom: .75rem !important; }
-      #products-grid h3{ font-size: .85rem !important; line-height: 1.1 !important; margin-bottom: .35rem !important; }
-      #products-grid p{ font-size: .68rem !important; line-height: 1.25 !important; margin-bottom: .6rem !important; }
-      #products-grid .text-3xl{ font-size: 1.05rem !important; }
-      #products-grid .py-4{ padding-top: .7rem !important; padding-bottom: .7rem !important; }
-      #products-grid a{ font-size: .62rem !important; border-radius: 1.1rem !important; }
-
-      /* Checkout modal: ensure it stays centered and fits small screens */
-      #checkoutModal > div{ width: min(96vw, 28rem) !important; }
-      #checkoutModal .glass{ padding: 1.25rem !important; border-radius: 1.75rem !important; }
-      #checkoutModal #checkoutTitle{ font-size: 1.5rem !important; }
-      #checkoutModal #checkoutPrice{ font-size: 2.25rem !important; }
-      #checkoutModal .text-5xl{ font-size: 2.25rem !important; }
-
-      /* Testimonials: avoid forcing horizontal zoom */
-      .min-w-\[340px\]{ min-width: 280px !important; }
+    @media (max-width: 360px) {
+      /* Extra-tight phones */
+      .p-10 { padding: 1.25rem !important; }
+      .p-8  { padding: 1.05rem !important; }
+      #checkoutPrice { font-size: 1.95rem !important; }
     }
 
   </style>
@@ -414,7 +428,7 @@
           </div>
         </div>
 
-        <div id="products-grid" class="grid grid-cols-3 gap-4 sm:gap-6"></div>
+        <div id="products-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
       </div>
     </section>
 
