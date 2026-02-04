@@ -176,6 +176,47 @@
       .hero-blob-small { display: none; }
       .hero-preview-card { display: none; }
     }
+  
+    /* === Mobile-first layout fixes (no zoom needed) === */
+    .safe-wrap { max-width: 100%; overflow-wrap: anywhere; }
+    .tap { -webkit-tap-highlight-color: transparent; }
+
+    /* Products: ALWAYS 3 per row (as requested) */
+    #products-grid{
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: stretch;
+    }
+    #products-grid > div{ min-width: 0; }
+    #products-grid img{ max-width: 100%; height: auto; }
+
+    @media (max-width: 640px){
+      /* Reduce large paddings so everything fits without zoom */
+      .p-10{ padding: 1.5rem !important; }
+      .p-8{ padding: 1.25rem !important; }
+      .px-4{ padding-left: 1rem !important; padding-right: 1rem !important; }
+
+      /* Product cards compact on phones (3-up grid needs this) */
+      #products-grid{ gap: .75rem !important; }
+      #products-grid .glass{ padding: .75rem !important; border-radius: 1.5rem !important; }
+      #products-grid .aspect-square{ border-radius: 1.15rem !important; margin-bottom: .75rem !important; }
+      #products-grid h3{ font-size: .85rem !important; line-height: 1.1 !important; margin-bottom: .35rem !important; }
+      #products-grid p{ font-size: .68rem !important; line-height: 1.25 !important; margin-bottom: .6rem !important; }
+      #products-grid .text-3xl{ font-size: 1.05rem !important; }
+      #products-grid .py-4{ padding-top: .7rem !important; padding-bottom: .7rem !important; }
+      #products-grid a{ font-size: .62rem !important; border-radius: 1.1rem !important; }
+
+      /* Checkout modal: ensure it stays centered and fits small screens */
+      #checkoutModal > div{ width: min(96vw, 28rem) !important; }
+      #checkoutModal .glass{ padding: 1.25rem !important; border-radius: 1.75rem !important; }
+      #checkoutModal #checkoutTitle{ font-size: 1.5rem !important; }
+      #checkoutModal #checkoutPrice{ font-size: 2.25rem !important; }
+      #checkoutModal .text-5xl{ font-size: 2.25rem !important; }
+
+      /* Testimonials: avoid forcing horizontal zoom */
+      .min-w-\[340px\]{ min-width: 280px !important; }
+    }
+
   </style>
 </head>
 <body>
@@ -373,7 +414,7 @@
           </div>
         </div>
 
-        <div id="products-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+        <div id="products-grid" class="grid grid-cols-3 gap-4 sm:gap-6"></div>
       </div>
     </section>
 
