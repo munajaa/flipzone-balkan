@@ -9,7 +9,7 @@ export const VENDORS_DATA = [
     discount: 40,
     category: "ostalo",
     image: "/slike/logo.png",
-    stripeLink: "https://buy.stripe.com/6oUcN57FO7cm4lefmK8k802",
+    stripeLink: "https://buy.stripe.com/14A6oHbW4bsC2d6gqO8k804",
     isHot: true,
     allVendors: true
   },
@@ -339,3 +339,4 @@ export const FAQ_DATA = [
   { q: "Koliko brzo mogu očekivati profit?", a: "Ovo zavisi isključivo od tvog rada. Neki naši članovi su povratili investiciju već u prvih 7 dana, dok je prosjek oko 14-21 dan." },
   { q: "Što dobijem u VIP grupi?", a: "VIP grupa uključuje pristup SVIM dobavljačima, video kursu, privatnom Discord serveru i svakodnevnim updateovima o najtraženijim artiklima." }
 ];
+
