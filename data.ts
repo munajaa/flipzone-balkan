@@ -390,38 +390,6 @@ export const REVIEWS_DATA = [
     initial: "J", 
     stars: 5, 
     image: "/slike/zarada/zarada12.png" 
-  },
-  { 
-    name: "Bruno", 
-    role: "VIP Member", 
-    text: "Najveća vrijednost je zajednica i brzi odgovori kad zapneš.", 
-    initial: "B", 
-    stars: 5, 
-    image: "/slike/zarada/zarada13.png" 
-  },
-  { 
-    name: "Kristijan", 
-    role: "Verifikovan Član", 
-    text: "Prestao sam raditi random greške koje me koštale novca.", 
-    initial: "K", 
-    stars: 5, 
-    image: "/slike/zarada/zarada14.png" 
-  },
-  { 
-    name: "Mario", 
-    role: "Aktivni Reseller", 
-    text: "Prodaja ide konstantno. Nije shema, nego realan sistem.", 
-    initial: "M", 
-    stars: 5, 
-    image: "/slike/zarada/zarada15.png" 
-  },
-  { 
-    name: "Robert", 
-    role: "VIP Member", 
-    text: "Vrijedi svake kune. Uštediš mjesece testiranja.", 
-    initial: "R", 
-    stars: 5, 
-    image: "/slike/zarada/zarada16.png" 
   }
 ];
 
@@ -506,5 +474,6 @@ export const FAQ_DATA = [
     a: "**Tako da ne ideš na sve odjednom: test narudžba, dobar oglas, realna marža, i fokus na proizvode koji se dokazano prodaju. To je glavna razlika između profita i bacanja novca.**",
   },
 ];
+
 
 
