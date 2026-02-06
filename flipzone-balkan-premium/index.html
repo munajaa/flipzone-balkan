@@ -3,1198 +3,516 @@
 <html lang="hr" class="scroll-smooth">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FlipZone Balkan — Reselling</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover" />
+  <title>FlipZone Balkan — Premium Reselling Community</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            brandBg: '#080710',
-            brandCard: '#0f1724',
+            brandBg: '#020306',
+            brandCard: '#080a10',
             accent1: '#6ee7b7',
             accent2: '#60a5fa',
-            brandText: '#e6eef6',
-            brandMuted: '#9aa4b2',
+            brandText: '#f8fafc',
+            brandMuted: '#94a3b8',
           },
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
+            sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
           },
           backgroundImage: {
             'brand-gradient': 'linear-gradient(135deg, #60a5fa 0%, #6ee7b7 100%)',
-            'main-bg': 'linear-gradient(180deg, #041024 0%, #071025 60%, #071018 100%)',
-          },
+            'mesh': 'radial-gradient(at 0% 0%, rgba(96, 165, 250, 0.15) 0, transparent 50%), radial-gradient(at 50% 0%, rgba(110, 231, 183, 0.1) 0, transparent 50%)',
+          }
         }
       }
     }
   </script>
   <style>
-    body {
-      background-color: #080710;
-      color: #e6eef6;
-      overflow-x: hidden;
+    :root {
+      --cursor-x: 0px;
+      --cursor-y: 0px;
     }
+
+    body {
+      background-color: #020306;
+      color: #f8fafc;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+      cursor: none; 
+    }
+
+    #custom-cursor {
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(110, 231, 183, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      left: var(--cursor-x);
+      top: var(--cursor-y);
+      transition: width 0.3s, height 0.3s;
+    }
+
+    .dot-cursor {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: #6ee7b7;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
+      left: var(--cursor-x);
+      top: var(--cursor-y);
+      box-shadow: 0 0 15px #6ee7b7;
+    }
+
+    @media (max-width: 1024px) {
+      body { cursor: auto; }
+      #custom-cursor, .dot-cursor { display: none; }
+    }
+
+    .noise::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+      opacity: 0.05;
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    .grid-bg {
+      background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(circle at center, black, transparent 80%);
+    }
+    
     .glass {
       background: rgba(255, 255, 255, 0.02);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     }
-    .glass-dark {
-      background: rgba(8, 7, 16, 0.8);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
+
     .text-gradient {
       background: linear-gradient(90deg, #60a5fa, #6ee7b7);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 10px rgba(110, 231, 183, 0.3));
     }
-    .card-glow:hover {
-      box-shadow: 0 0 30px rgba(110, 231, 183, 0.1);
-      border-color: rgba(110, 231, 183, 0.2);
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.2, 1, 0.2, 1);
     }
-    ::-webkit-scrollbar {
-      width: 10px;
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
     }
-    ::-webkit-scrollbar-track {
-      background: #080710;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #1e293b;
-      border-radius: 10px;
-      border: 2px solid #080710;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #334155;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    .animate-fade-in {
-      animation: fadeIn 0.3s ease-in-out;
-    }
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
+
     @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0px); }
+      0%, 100% { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(-10px) rotate(1deg); }
     }
-    .animate-float {
-      animation: float 4s ease-in-out infinite;
+    .animate-float { animation: float 6s ease-in-out infinite; }
+
+    .btn-active:active { transform: scale(0.95); }
+    
+    .card-hover {
+      transition: all 0.4s cubic-bezier(0.2, 1, 0.2, 1);
+      position: relative;
+      overflow: hidden;
     }
-    @keyframes slideUpFade {
-      from { transform: translateY(18px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    .card-hover:hover {
+      transform: translateY(-5px);
+      border-color: rgba(110, 231, 183, 0.4);
+      background: rgba(255, 255, 255, 0.04);
     }
-    .hero-animate { opacity: 0; transform: translateY(18px); animation: slideUpFade 0.7s cubic-bezier(.22,.9,.26,1) forwards; }
-    .delay-0 { animation-delay: 0s; }
-    .delay-100 { animation-delay: 0.12s; }
-    .delay-200 { animation-delay: 0.25s; }
-    .delay-300 { animation-delay: 0.38s; }
-    .hero-cta-animate:hover { transform: translateY(-4px) scale(1.02); }
-    @keyframes previewTilt {
-      0% { transform: rotate(1deg) translateY(0); }
-      50% { transform: rotate(-1deg) translateY(-6px); }
-      100% { transform: rotate(1deg) translateY(0); }
-    }
-    .hero-preview-card .preview-tilt { animation: previewTilt 6s ease-in-out infinite; }
-    .faq-item {
-      cursor: pointer;
+
+    .faq-answer {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .faq-item.open .faq-answer {
       max-height: 500px;
       opacity: 1;
-      margin-top: 1rem;
+      padding-top: 1.5rem;
     }
-    .faq-item .faq-answer {
-      max-height: 0;
+    .faq-item.open .faq-icon { transform: rotate(180deg); color: #6ee7b7; background: rgba(110, 231, 183, 0.1); }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+
+    /* --- COMPACT CHECKOUT STYLES --- */
+    #checkoutOverlay {
       opacity: 0;
-      overflow: hidden;
-      transition: all 0.5s ease;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s;
+      display: flex;
     }
-    .faq-item.open .faq-icon {
-      transform: rotate(180deg);
-      background-color: #6ee7b7;
-      color: #080710;
+    #checkoutOverlay.active {
+      opacity: 1;
+      visibility: visible;
     }
-    /* Hero tweaks */
-    .hero-cta-small {
-      padding: .6rem 1rem;
-      border-radius: 12px;
+
+    .modal-sheet {
+      transform: translateY(100%);
+      transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+      will-change: transform;
+      z-index: 110;
+      overscroll-behavior: contain;
+      max-height: 55vh; 
     }
-    .hero-cta-outline {
-      border: 1px solid rgba(255,255,255,0.06);
-      background: linear-gradient(90deg, rgba(96,165,250,0.08), rgba(110,231,183,0.06));
-      backdrop-filter: blur(6px);
+    .modal-sheet.active {
+      transform: translateY(0);
     }
-    .hero-preview-img {
-      max-height: 520px;
-      object-fit: cover;
-      border-radius: 1.25rem;
-      transition: transform 0.9s ease;
+
+    @media (min-width: 640px) {
+      .modal-sheet {
+        position: relative !important;
+        bottom: auto !important;
+        left: auto !important;
+        width: 100%;
+        max-width: 480px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(40px) scale(0.98) !important;
+        border-radius: 2rem;
+        transition: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+        max-height: 80vh;
+      }
+      .modal-sheet.active {
+        transform: translateY(0) scale(1) !important;
+        opacity: 1;
+        visibility: visible;
+      }
     }
-    .hero-preview-card:hover .hero-preview-img { transform: scale(1.03) rotate(0deg); }
-    @media (max-width: 768px) {
-      .hero-blob-small { display: none; }
-      .hero-preview-card { display: none; }
+    
+    .payment-option-radio {
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.1);
+      border-radius: 50%;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .payment-option-radio:checked {
+      border-color: #6ee7b7;
+      background: rgba(110, 231, 183, 0.1);
+    }
+    .payment-option-radio:checked::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #6ee7b7;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .shadow-glow {
+      filter: drop-shadow(0 0 8px rgba(110, 231, 183, 0.3));
     }
   </style>
+<link rel="stylesheet" href="/index.css">
 </head>
-<body>
-  <div class="min-h-screen font-sans selection:bg-accent1 selection:text-brandBg">
+<body class="antialiased noise">
+  <div id="custom-cursor"></div>
+  <div class="dot-cursor"></div>
+
+  <div class="min-h-screen flex flex-col relative overflow-hidden bg-mesh">
+    <div class="absolute inset-0 grid-bg -z-10"></div>
+
     <!-- NAVBAR -->
-    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 bg-transparent py-8">
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 py-5">
       <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <div class="flex items-center gap-4 group cursor-pointer">
-          <div class="w-12 h-12 rounded-2xl bg-brand-gradient flex items-center justify-center font-black text-brandBg text-xl shadow-lg shadow-accent2/30 group-hover:scale-110 transition-transform duration-300">FZ</div>
-          <div class="hidden sm:block">
-            <h1 class="font-black text-xl tracking-tight text-white">FlipZone</h1>
-            <p class="text-[10px] text-brandMuted uppercase tracking-[0.2em] font-bold leading-none">Balkan Premium</p>
+        <div class="flex items-center gap-4 cursor-pointer group" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+          <div class="w-10 h-10 rounded-xl bg-brand-gradient flex items-center justify-center font-black text-brandBg text-lg shadow-[0_0_20px_rgba(110,231,183,0.3)] group-hover:rotate-12 transition-transform">FZ</div>
+          <div class="flex flex-col">
+            <span class="font-extrabold text-[16px] tracking-tight text-white leading-none">FlipZone</span>
+            <span class="text-[8px] text-accent1 uppercase tracking-[0.3em] font-black mt-1">Balkan Premium</span>
           </div>
         </div>
-        <div class="flex items-center gap-8">
-          <div class="hidden md:flex items-center gap-8">
-            <a href="#about" class="text-sm font-semibold text-brandMuted hover:text-white transition-colors">O nama</a>
-            <a href="#pricing" class="text-sm font-semibold text-brandMuted hover:text-white transition-colors">Cijene</a>
-            <a href="#faq" class="text-sm font-semibold text-brandMuted hover:text-white transition-colors">FAQ</a>
-          </div>
-          <a href="#pricing" class="px-6 py-3 rounded-2xl bg-brand-gradient text-brandBg font-extrabold text-sm hover:shadow-[0_0_20px_rgba(110,231,183,0.4)] hover:-translate-y-0.5 transition-all">
-            Pridruži se
-          </a>
+        <div class="hidden md:flex items-center gap-10 text-[11px] font-bold uppercase tracking-[0.2em] text-brandMuted">
+          <a href="#about" class="hover:text-white transition-all hover:tracking-[0.3em]">O nama</a>
+          <a href="#pricing" class="hover:text-white transition-all hover:tracking-[0.3em]">Dobavljači</a>
+          <a href="#reviews" class="hover:text-white transition-all hover:tracking-[0.3em]">Zarada</a>
+          <a href="#faq" class="hover:text-white transition-all hover:tracking-[0.3em]">FAQ</a>
         </div>
+        <a href="#pricing" class="px-6 py-3 rounded-xl bg-brand-gradient text-brandBg font-black text-[10px] uppercase tracking-widest btn-active transition-all shadow-[0_10px_20_rgba(110,231,183,0.4)]">
+          Pridruži se
+        </a>
       </div>
     </nav>
 
     <!-- HERO SECTION -->
-    <section class="relative pt-20 pb-16 px-4 md:px-6">
-      <div class="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-accent2/10 blur-[150px] rounded-full -z-10 animate-pulse"></div>
-      <div class="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-accent1/10 blur-[150px] rounded-full -z-10"></div>
-      
-      <div class="max-w-7xl mx-auto">
-        <div class="grid lg:grid-cols-12 gap-16 items-center">
-          <div class="lg:col-span-7 space-y-10">
-            <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full glass border border-accent1/20">
-              <span class="flex h-3 w-3 relative">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent1 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-3 w-3 bg-accent1"></span>
-              </span>
-              <span class="text-[10px] font-black uppercase tracking-[0.2em] text-accent1">Aktivni korisnici: 256</span>
-            </div>
-            
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black leading-[1] tracking-tighter">
-              FlipZone <br />
-              <span class="text-gradient italic hero-animate delay-0">Reselling</span>
-            </h1>
-            
-            <p class="text-sm md:text-base lg:text-lg text-brandMuted max-w-xl leading-relaxed font-medium hero-animate delay-100">
-              Pristupi elitnim dobavljačima, nauči provjerene strategije i skaliraj svoj profit uz vodeću zajednicu na Balkanu.
-            </p>
-            
-            <div class="flex flex-wrap gap-4">
-              <a href="#pricing" class="px-6 py-3 md:px-8 md:py-4 rounded-xl bg-brand-gradient text-brandBg font-black text-sm md:text-base hover:shadow-[0_18px_36px_rgba(110,231,183,0.18)] hover:-translate-y-0.5 transition-all hero-animate delay-200 hero-cta-animate">
-                Započni Edukaciju
-              </a>
-              <button class="px-6 py-3 md:px-8 md:py-4 rounded-xl glass hero-cta-outline hero-cta-small font-black text-sm md:text-base hover:bg-white/8 transition-all flex items-center gap-3 hero-animate delay-300 hero-cta-animate" onclick="alert('Demo video sekcija')">
-                <i class="fa-solid fa-circle-play text-accent2"></i>
-                Besplatan Demo
-              </button>
-            </div>
-
-            <div class="flex items-center gap-8 pt-6">
-              <div>
-                <h4 class="text-xl md:text-2xl font-black text-white">2k+</h4>
-                <p class="text-[10px] font-bold text-brandMuted uppercase tracking-widest">Aktivnih Članova</p>
-              </div>
-              <div class="w-px h-10 bg-white/10"></div>
-              <div>
-                <h4 class="text-xl md:text-2xl font-black text-white">50+</h4>
-                <p class="text-[10px] font-bold text-brandMuted uppercase tracking-widest">Video Modula</p>
-              </div>
-              <div class="w-px h-10 bg-white/10"></div>
-              <div>
-                <h4 class="text-xl md:text-2xl font-black text-white">4.9/5</h4>
-                <p class="text-[10px] font-bold text-brandMuted uppercase tracking-widest">Ocjena Kursa</p>
-              </div>
-            </div>
+    <section class="relative pt-40 lg:pt-60 pb-24 px-6">
+      <div class="max-w-7xl mx-auto text-center lg:text-left flex flex-col lg:flex-row items-center gap-16">
+        <div class="w-full lg:w-3/5 space-y-10">
+          <div class="reveal inline-flex items-center gap-3 px-5 py-2 rounded-full glass border border-white/10 mx-auto lg:mx-0">
+            <span class="w-2 h-2 rounded-full bg-accent1 shadow-[0_0_10px_#6ee7b7]"></span>
+            <span class="text-[10px] font-black uppercase tracking-[0.3em] text-accent1">#1 Reselling Community</span>
           </div>
-
-          <div class="lg:col-span-5 relative hidden md:block hero-preview-card">
-            <div class="absolute inset-0 bg-brand-gradient blur-[80px] opacity-10 -z-10 animate-float"></div>
-            <div class="glass rounded-2xl md:rounded-[3rem] p-3 md:p-4 border-white/10 overflow-hidden shadow-2xl rotate-1 hover:rotate-0 transition-all duration-700 group preview-tilt">
-              <img src="https://picsum.photos/id/119/600/800" alt="Platform Preview" class="hero-preview-img rounded-2xl w-full h-[420px] md:h-auto shadow-2xl group-hover:scale-105 transition-transform duration-900" />
-              <div class="absolute inset-0 bg-gradient-to-t from-brandBg/80 via-transparent to-transparent flex items-end p-8 md:p-12">
-                 <div class="space-y-1 md:space-y-2">
-                   <p class="text-accent1 font-black text-xs md:text-sm uppercase tracking-widest">Dashboard Preview</p>
-                   <h3 class="text-lg md:text-2xl font-black text-white leading-tight">Svi dobavljači na dohvat ruke.</h3>
-                 </div>
-              </div>
+          <h1 class="reveal font-black italic tracking-tighter text-white text-5xl sm:text-7xl lg:text-8xl leading-[0.9]">
+            FlipZone <br />
+            <span class="text-gradient">Reselling</span>
+          </h1>
+          <p class="reveal text-lg sm:text-2xl text-brandMuted max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
+            Tvoj mobitel je mašina za novac. Mi ti dajemo gorivo: elitne dobavljače i strategije koje rade.
+          </p>
+          <div class="reveal flex flex-col sm:flex-row gap-5 pt-6">
+            <a href="#pricing" class="h-16 flex items-center justify-center w-full sm:w-auto px-12 rounded-2xl bg-brand-gradient text-brandBg font-black text-lg shadow-2xl btn-active transition-all group">
+              Zgrabi Svoj Paket <i class="fa-solid fa-bolt ml-3 text-sm group-hover:scale-125 transition-transform"></i>
+            </a>
+            <button onclick="document.getElementById('about').scrollIntoView();" class="h-16 flex items-center justify-center w-full sm:w-auto px-12 rounded-2xl glass font-black text-lg border-white/10 btn-active transition-all hover:bg-white/5">
+              Istraži Više
+            </button>
+          </div>
+        </div>
+        <div class="reveal w-full lg:w-2/5 hidden lg:block">
+          <div class="relative animate-float">
+            <div class="absolute -inset-4 bg-brand-gradient opacity-20 blur-3xl rounded-full"></div>
+            <div class="glass p-4 rounded-3xl border-white/20 relative shadow-2xl">
+               <img src="/slike/logo.png" alt="FlipZone" class="rounded-2xl w-full h-auto brightness-110" />
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- WHY US SECTION -->
-    <section id="about" class="py-16 md:py-24 px-4 md:px-6">
-      <div class="max-w-7xl mx-auto">
-        <div class="grid lg:grid-cols-3 gap-8">
-          <div class="glass p-10 rounded-[2.5rem] border border-white/5 hover:border-accent1/20 transition-all duration-500 group card-glow">
-            <div class="w-16 h-16 rounded-[1.5rem] bg-white/5 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-              <i class="fa-solid fa-truck-fast text-3xl text-accent1"></i>
-            </div>
-            <h3 class="text-2xl font-black text-white mb-4 italic">Pronalaženje Elitnih Dobavljača</h3>
-            <p class="text-brandMuted leading-relaxed font-medium">Direktni kontakti tvornica koje niko drugi ne deli. Kvalitet na prvom mestu.</p>
+    <!-- MARQUEE -->
+    <div class="py-6 border-y border-white/5 bg-white/[0.02] overflow-hidden select-none relative">
+      <div class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-brandBg to-transparent z-10"></div>
+      <div class="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-brandBg to-transparent z-10"></div>
+      <div class="flex whitespace-nowrap animate-marquee">
+        <div id="marquee-content" class="flex items-center gap-16"></div>
+      </div>
+    </div>
+
+    <!-- FEATURES -->
+    <section id="about" class="py-32 px-6">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="reveal glass p-10 rounded-2xl card-hover group">
+          <div class="w-14 h-14 rounded-xl bg-accent1/10 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-rocket text-3xl text-accent1"></i>
           </div>
-          
-          <div class="glass p-10 rounded-[2.5rem] border border-white/5 hover:border-accent1/20 transition-all duration-500 group card-glow">
-            <div class="w-16 h-16 rounded-[1.5rem] bg-white/5 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-              <i class="fa-solid fa-chart-pie text-3xl text-accent2"></i>
-            </div>
-            <h3 class="text-2xl font-black text-white mb-4 italic">Vladanje Marketingom</h3>
-            <p class="text-brandMuted leading-relaxed font-medium">Od vizuelnog identiteta do naprednih oglasa. Kreiramo brend, ne samo oglas.</p>
+          <h3 class="text-2xl font-black mb-4 italic text-white">Instant Start</h3>
+          <p class="text-brandMuted leading-relaxed">Nema čekanja. Čim uplatiš, ulaziš u VIP zonu i dobivaš sve kontakte na dlanu.</p>
+        </div>
+        <div class="reveal glass p-10 rounded-2xl card-hover group">
+          <div class="w-14 h-14 rounded-xl bg-accent2/10 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-brain text-3xl text-accent2"></i>
           </div>
-          
-          <div class="glass p-10 rounded-[2.5rem] border border-white/5 hover:border-accent1/20 transition-all duration-500 group card-glow">
-            <div class="w-16 h-16 rounded-[1.5rem] bg-white/5 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-              <i class="fa-solid fa-users-gear text-3xl text-white"></i>
-            </div>
-            <h3 class="text-2xl font-black text-white mb-4 italic">Podrška Zajednice</h3>
-            <p class="text-brandMuted leading-relaxed font-medium">Naš Discord nije samo chat, to je tvoj board direktora dostupan 24/7.</p>
+          <h3 class="text-2xl font-black mb-4 italic text-white">Mindset & Skill</h3>
+          <p class="text-brandMuted leading-relaxed">Ne učimo te samo preprodaji, gradimo tvoj poduzetnički mentalitet za dugoročan uspjeh.</p>
+        </div>
+        <div class="reveal glass p-10 rounded-2xl card-hover group">
+          <div class="w-14 h-14 rounded-xl bg-white/5 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-shield-halved text-3xl text-white/80"></i>
           </div>
+          <h3 class="text-2xl font-black mb-4 italic text-white">Sigurne Isplate</h3>
+          <p class="text-brandMuted leading-relaxed">Učimo te sigurnim metodama naplate i slanja kako bi tvoj profit uvijek bio zaštićen.</p>
         </div>
       </div>
     </section>
 
-    <!-- CURRICULUM PREVIEW -->
-    <section class="py-16 md:py-24 px-4 md:px-6 bg-white/[0.02] border-y border-white/5">
-      <div class="max-w-7xl mx-auto flex flex-col items-center">
-         <div class="text-center mb-20 space-y-4">
-           <h2 class="text-2xl md:text-3xl lg:text-5xl font-black tracking-tight">Put do <span class="text-gradient">Profitabilnosti</span></h2>
-           <p class="text-brandMuted max-w-2xl mx-auto text-lg">Svaka lekcija je pažljivo osmišljena da ukloni nagađanje iz tvog biznisa.</p>
-         </div>
-         
-         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-           <div class="p-8 rounded-[2rem] glass border border-white/5 flex gap-6 group hover:bg-white/[0.04] transition-all">
-             <span class="text-4xl font-black text-white/10 group-hover:text-accent1/30 transition-colors">01</span>
-             <div>
-               <h4 class="text-xl font-bold text-white mb-2">Pravni Okvir & Mentalnost</h4>
-               <p class="text-sm text-brandMuted leading-relaxed font-medium">Osnivanje, porezi i kako razmišlja top 1% prodavaca.</p>
-             </div>
-           </div>
-           
-           <div class="p-8 rounded-[2rem] glass border border-white/5 flex gap-6 group hover:bg-white/[0.04] transition-all">
-             <span class="text-4xl font-black text-white/10 group-hover:text-accent1/30 transition-colors">02</span>
-             <div>
-               <h4 class="text-xl font-bold text-white mb-2">Lanč Dobave</h4>
-               <p class="text-sm text-brandMuted leading-relaxed font-medium">Kako prepoznati vrhunski batch i dogovoriti najbolju cijenu.</p>
-             </div>
-           </div>
-           
-           <div class="p-8 rounded-[2rem] glass border border-white/5 flex gap-6 group hover:bg-white/[0.04] transition-all">
-             <span class="text-4xl font-black text-white/10 group-hover:text-accent1/30 transition-colors">03</span>
-             <div>
-               <h4 class="text-xl font-bold text-white mb-2">Vizuelna Prodaja</h4>
-               <p class="text-sm text-brandMuted leading-relaxed font-medium">Psihologija fotografije i video materijala za maksimalnu konverziju.</p>
-             </div>
-           </div>
-           
-           <div class="p-8 rounded-[2rem] glass border border-white/5 flex gap-6 group hover:bg-white/[0.04] transition-all">
-             <span class="text-4xl font-black text-white/10 group-hover:text-accent1/30 transition-colors">04</span>
-             <div>
-               <h4 class="text-xl font-bold text-white mb-2">Strategija Oglaa</h4>
-               <p class="text-sm text-brandMuted leading-relaxed font-medium">Facebook, Instagram i TikTok strategije koje troše malo, a donose mnogo.</p>
-             </div>
-           </div>
-           
-           <div class="p-8 rounded-[2rem] glass border border-white/5 flex gap-6 group hover:bg-white/[0.04] transition-all">
-             <span class="text-4xl font-black text-white/10 group-hover:text-accent1/30 transition-colors">05</span>
-             <div>
-               <h4 class="text-xl font-bold text-white mb-2">Iskustvo Kupca</h4>
-               <p class="text-sm text-brandMuted leading-relaxed font-medium">Kako izgraditi bazu lojalnih kupaca koji se stalno vraćaju.</p>
-             </div>
-           </div>
-           
-           <div class="p-8 rounded-[2rem] glass border border-white/5 flex gap-6 group hover:bg-white/[0.04] transition-all">
-             <span class="text-4xl font-black text-white/10 group-hover:text-accent1/30 transition-colors">06</span>
-             <div>
-               <h4 class="text-xl font-bold text-white mb-2">Skaliranje Naviše</h4>
-               <p class="text-sm text-brandMuted leading-relaxed font-medium">Delegiranje zadataka i širenje na strana tržišta.</p>
-             </div>
-           </div>
-         </div>
+    <!-- ROADMAP -->
+    <section class="py-32 px-6 bg-white/[0.01] relative">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20 reveal">
+          <h2 class="text-4xl sm:text-6xl font-black italic text-white tracking-tight">Tvoja <span class="text-gradient">Evolucija</span></h2>
+          <p class="text-brandMuted mt-4 uppercase tracking-[0.4em] text-xs font-black">Od nule do vrha</p>
+        </div>
+        <div id="roadmap-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
       </div>
     </section>
 
-    <!-- PRICING & VENDORS -->
-    <section id="pricing" class="py-16 md:py-24 px-4 md:px-6">
+    <!-- VENDORS MARKETPLACE -->
+    <section id="pricing" class="py-32 px-6">
       <div class="max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+        <div class="flex flex-col md:flex-row justify-between items-end gap-10 mb-20 reveal">
           <div class="space-y-4">
-            <h2 class="text-3xl md:text-4xl lg:text-5xl font-black italic">Izaberi svoj <br/><span class="text-gradient">Arsenal</span></h2>
-            <p class="text-brandMuted font-medium max-w-sm">VIP pristup za potpunu kontrolu ili pojedinačni kontakti za specifične potrebe.</p>
+            <h2 class="text-5xl font-black italic text-white">Premium <span class="text-gradient">Arhiva</span></h2>
+            <p class="text-brandMuted text-lg">Svaki vendor je ručno testiran i verificiran od strane našeg tima.</p>
+          </div>
+          <div class="px-6 py-3 rounded-full glass border-accent1/20 text-accent1 font-black text-xs uppercase tracking-widest">
+            26+ Aktivnih Izvora
           </div>
         </div>
-
-        <div id="products-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+        <div id="products-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8"></div>
       </div>
     </section>
 
-    <!-- REZULTATI / GALLERY -->
-    <section class="py-16 md:py-24 px-4 md:px-6 bg-white/[0.01]">
+    <!-- REVIEWS & PROFITS (COMBINED) -->
+    <section id="reviews" class="py-32 px-6 bg-white/[0.02]">
        <div class="max-w-7xl mx-auto">
-          <div class="flex flex-col items-center mb-20 text-center">
-             <h2 class="text-2xl md:text-3xl lg:text-4xl font-black mb-4 md:mb-6">Rezultati govore <span class="text-gradient">sve.</span></h2>
-             <div class="h-1 w-32 bg-brand-gradient rounded-full"></div>
+          <div class="text-center mb-16 reveal">
+            <h2 class="text-3xl sm:text-5xl font-black italic text-white tracking-tighter">Wall of <span class="text-gradient">Profit</span></h2>
+            <p class="text-brandMuted mt-3 uppercase tracking-[0.3em] text-[10px] font-black italic opacity-60">Dokazi uspjeha naših članova</p>
           </div>
-          
-          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
-            <div class="relative rounded-3xl overflow-hidden aspect-square glass cursor-pointer group" onclick="openLightbox('slike/zarada/zarada1.png');">
-              <img src="slike/zarada/zarada1.png" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-3" alt="Uspjeh" />
-              <div class="absolute inset-0 bg-accent2/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 scale-50 group-hover:scale-100 transition-all duration-500">
-                  <i class="fa-solid fa-plus text-white text-xl"></i>
-                </div>
-              </div>
-            </div>
-
-            <div class="relative rounded-3xl overflow-hidden aspect-square glass cursor-pointer group" onclick="openLightbox('slike/zarada/zarada2.png');">
-              <img src="slike/zarada/zarada2.png" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-3" alt="Uspjeh" />
-              <div class="absolute inset-0 bg-accent2/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 scale-50 group-hover:scale-100 transition-all duration-500">
-                  <i class="fa-solid fa-plus text-white text-xl"></i>
-                </div>
-              </div>
-            </div>
-
-            <div class="relative rounded-3xl overflow-hidden aspect-square glass cursor-pointer group" onclick="openLightbox('slike/zarada/zarada3.png');">
-              <img src="slike/zarada/zarada3.png" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-3" alt="Uspjeh" />
-              <div class="absolute inset-0 bg-accent2/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 scale-50 group-hover:scale-100 transition-all duration-500">
-                  <i class="fa-solid fa-plus text-white text-xl"></i>
-                </div>
-              </div>
-            </div>
-
-            <div class="relative rounded-3xl overflow-hidden aspect-square glass cursor-pointer group" onclick="openLightbox('slike/zarada/zarada4.png');">
-              <img src="slike/zarada/zarada4.png" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-3" alt="Uspjeh" />
-              <div class="absolute inset-0 bg-accent2/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 scale-50 group-hover:scale-100 transition-all duration-500">
-                  <i class="fa-solid fa-plus text-white text-xl"></i>
-                </div>
-              </div>
-            </div>
-
-            <div class="relative rounded-3xl overflow-hidden aspect-square glass cursor-pointer group" onclick="openLightbox('slike/zarada/zarada5.png');">
-              <img src="slike/zarada/zarada5.png" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-3" alt="Uspjeh" />
-              <div class="absolute inset-0 bg-accent2/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 scale-50 group-hover:scale-100 transition-all duration-500">
-                  <i class="fa-solid fa-plus text-white text-xl"></i>
-                </div>
-              </div>
-            </div>
-
-            <div class="relative rounded-3xl overflow-hidden aspect-square glass cursor-pointer group" onclick="openLightbox('slike/zarada/zadovoljan1.png');">
-              <img src="slike/zarada/zadovoljan1.png" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-3" alt="Uspjeh" />
-              <div class="absolute inset-0 bg-accent2/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 scale-50 group-hover:scale-100 transition-all duration-500">
-                  <i class="fa-solid fa-plus text-white text-xl"></i>
-                </div>
-              </div>
-            </div>
-
-            <div class="relative rounded-3xl overflow-hidden aspect-square glass cursor-pointer group" onclick="openLightbox('slike/zarada/zadovoljan2.png');">
-              <img src="slike/zarada/zadovoljan2.png" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-3" alt="Uspjeh" />
-              <div class="absolute inset-0 bg-accent2/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 scale-50 group-hover:scale-100 transition-all duration-500">
-                  <i class="fa-solid fa-plus text-white text-xl"></i>
-                </div>
-              </div>
-            </div>
-
-            <div class="relative rounded-3xl overflow-hidden aspect-square glass cursor-pointer group" onclick="openLightbox('slike/zarada/zadovoljan3.png');">
-              <img src="slike/zarada/zadovoljan3.png" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-3" alt="Uspjeh" />
-              <div class="absolute inset-0 bg-accent2/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 scale-50 group-hover:scale-100 transition-all duration-500">
-                  <i class="fa-solid fa-plus text-white text-xl"></i>
-                </div>
-              </div>
-            </div>
-
-            <div class="relative rounded-3xl overflow-hidden aspect-square glass cursor-pointer group" onclick="openLightbox('slike/zarada/zadovoljan4.png');">
-              <img src="slike/zarada/zadovoljan4.png" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-3" alt="Uspjeh" />
-              <div class="absolute inset-0 bg-accent2/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 scale-50 group-hover:scale-100 transition-all duration-500">
-                  <i class="fa-solid fa-plus text-white text-xl"></i>
-                </div>
-              </div>
-            </div>
-
-            <div class="relative rounded-3xl overflow-hidden aspect-square glass cursor-pointer group" onclick="openLightbox('slike/zarada/zadovoljan5.png');">
-              <img src="slike/zarada/zadovoljan5.png" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-3" alt="Uspjeh" />
-              <div class="absolute inset-0 bg-accent2/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 scale-50 group-hover:scale-100 transition-all duration-500">
-                  <i class="fa-solid fa-plus text-white text-xl"></i>
-                </div>
-              </div>
-            </div>
-
-            <div class="relative rounded-3xl overflow-hidden aspect-square glass cursor-pointer group" onclick="openLightbox('slike/zarada/zadovoljan6.png');">
-              <img src="slike/zarada/zadovoljan6.png" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-3" alt="Uspjeh" />
-              <div class="absolute inset-0 bg-accent2/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 scale-50 group-hover:scale-100 transition-all duration-500">
-                  <i class="fa-solid fa-plus text-white text-xl"></i>
-                </div>
-              </div>
-            </div>
-
-            <div class="relative rounded-3xl overflow-hidden aspect-square glass cursor-pointer group" onclick="openLightbox('slike/zarada/zadivoljni_20250515_170307_0000.png');">
-              <img src="slike/zarada/zadivoljni_20250515_170307_0000.png" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-3" alt="Uspjeh" />
-              <div class="absolute inset-0 bg-accent2/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 scale-50 group-hover:scale-100 transition-all duration-500">
-                  <i class="fa-solid fa-plus text-white text-xl"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Lightbox Modal -->
-          <div id="lightboxModal" class="hidden fixed inset-0 z-[100] bg-brandBg/95 backdrop-blur-2xl flex items-center justify-center p-6 animate-fade-in" onclick="if(event.target === this) closeLightbox();">
-            <div class="relative max-w-2xl w-full max-h-[80vh] flex items-center justify-center" onclick="event.stopPropagation()">
-              <img id="lightboxImage" src="" class="max-w-full max-h-[75vh] object-contain rounded-[2.5rem] shadow-[0_0_100px_rgba(0,0,0,0.8)]" alt="Slika" />
-              <button class="absolute -top-12 -right-12 w-16 h-16 rounded-full bg-accent1 text-brandBg flex items-center justify-center text-3xl hover:bg-accent2 transition-all duration-300 shadow-lg hover:scale-110 font-black" onclick="closeLightbox();" title="Zatvori (ESC)">
-                <i class="fa-solid fa-xmark"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- Checkout Modal -->
-          <div id="checkoutModal" class="hidden fixed inset-0 z-[101] bg-brandBg/95 backdrop-blur-2xl flex items-center justify-center p-6 animate-fade-in" onclick="if(event.target === this) closeCheckout();">
-            <div class="relative w-full max-w-md max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
-              <div class="glass rounded-[2.5rem] border border-white/10 p-8 space-y-6">
-                <!-- Close Button -->
-                <button onclick="closeCheckout();" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-white transition-all">
-                  <i class="fa-solid fa-xmark text-xl"></i>
-                </button>
-
-                <!-- Product Info -->
-                <div class="space-y-4">
-                  <h2 id="checkoutTitle" class="text-3xl font-black text-white">Kupi Dobavljača</h2>
-                  <div class="flex items-baseline gap-2">
-                    <span id="checkoutPrice" class="text-5xl font-black text-accent1">5.99€</span>
-                    <span class="text-brandMuted text-sm uppercase tracking-widest font-bold">Doživotni pristup</span>
-                  </div>
-                  <p id="checkoutDesc" class="text-brandMuted leading-relaxed">Pristup provjerenom dobavljaču.</p>
-                </div>
-
-                <!-- Divider -->
-                <div class="h-px bg-white/10"></div>
-
-                <!-- Summary -->
-                <div class="space-y-3">
-                  <div class="flex justify-between items-center">
-                    <span class="text-brandMuted">Cijena:</span>
-                    <span id="summaryPrice" class="font-black text-white">5.99€</span>
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="text-brandMuted">Naknada:</span>
-                    <span class="font-black text-white">0€</span>
-                  </div>
-                  <div class="h-px bg-white/10"></div>
-                  <div class="flex justify-between items-center">
-                    <span class="text-white font-bold">Ukupno:</span>
-                    <span id="totalPrice" class="text-2xl font-black text-accent1">5.99€</span>
-                  </div>
-                </div>
-
-                <!-- Payment Method -->
-                <div class="space-y-4">
-                  <h3 class="font-black text-white">Metoda plaćanja</h3>
-                  <div class="grid gap-3">
-                    <label class="flex items-center gap-3 p-4 rounded-2xl border border-accent1/30 bg-accent1/5 cursor-pointer hover:border-accent1/60 transition-all">
-                      <input type="radio" name="payment" value="stripe" class="w-4 h-4" checked />
-                      <span class="flex-1 font-semibold text-white">Stripe (Kartica)</span>
-                      <i class="fa-brands fa-stripe text-accent1 text-xl"></i>
-                    </label>
-                    <label class="flex items-center gap-3 p-4 rounded-2xl border border-white/5 bg-white/[0.02] cursor-pointer hover:border-white/20 transition-all opacity-50">
-                      <input type="radio" name="payment" value="paypal" class="w-4 h-4" disabled />
-                      <span class="flex-1 font-semibold text-white">PayPal</span>
-                      <i class="fa-brands fa-paypal text-blue-400 text-xl"></i>
-                    </label>
-                  </div>
-                </div>
-
-                <!-- CTA Buttons -->
-                <div class="space-y-3 pt-4">
-                  <button id="checkoutBtn" onclick="processCheckout();" class="w-full py-4 rounded-2xl bg-brand-gradient text-brandBg font-black text-lg uppercase tracking-widest hover:shadow-[0_20px_40px_rgba(110,231,183,0.3)] hover:-translate-y-1 transition-all shadow-lg">
-                    Nastavi ka Plaćanju
-                    <i class="fa-solid fa-lock text-sm"></i>
-                  </button>
-                  <button onclick="closeCheckout();" class="w-full py-3 rounded-2xl bg-white/5 text-white font-bold uppercase tracking-widest hover:bg-white/10 transition-all border border-white/10">
-                    Otkaži
-                  </button>
-                </div>
-
-                <!-- Security Info -->
-                <div class="flex items-center justify-center gap-2 text-[10px] text-brandMuted opacity-75">
-                  <i class="fa-solid fa-shield text-accent1"></i>
-                  <span>Sigurno plaćanje | SSL Šifrirano</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <!-- Reviews Grid (2 columns on mobile) -->
+          <div id="reviews-grid" class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-8"></div>
        </div>
-    </section>
-
-    <!-- TESTIMONIALS -->
-    <section class="py-16 md:py-24 px-4 md:px-6 overflow-hidden">
-      <div class="max-w-7xl mx-auto">
-        <div class="flex gap-8 no-scrollbar overflow-x-auto pb-12 snap-x">
-          <div class="min-w-[340px] md:min-w-[420px] glass p-10 rounded-[3rem] snap-center border border-white/5 relative group">
-            <i class="fa-solid fa-quote-left absolute top-10 right-10 text-4xl text-white/5 group-hover:text-accent1/10 transition-colors"></i>
-            <div class="flex gap-1 mb-6">
-              <i class="fa-solid fa-star text-[10px] text-accent1"></i>
-              <i class="fa-solid fa-star text-[10px] text-accent1"></i>
-              <i class="fa-solid fa-star text-[10px] text-accent1"></i>
-              <i class="fa-solid fa-star text-[10px] text-accent1"></i>
-              <i class="fa-solid fa-star text-[10px] text-accent1"></i>
-            </div>
-            <p class="text-lg font-medium text-brandText leading-relaxed mb-10 italic">"Kurikulum je stvarno detaljan — uspio sam pokrenuti prvi profitabilan listing u samo 30 dana."</p>
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 rounded-2xl bg-brand-gradient flex items-center justify-center font-black text-brandBg text-xs">M</div>
-              <div>
-                <p class="font-black text-white text-sm">Marko</p>
-                <p class="text-[10px] text-brandMuted uppercase tracking-widest font-bold">Verifikovan Član</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="min-w-[340px] md:min-w-[420px] glass p-10 rounded-[3rem] snap-center border border-white/5 relative group">
-            <i class="fa-solid fa-quote-left absolute top-10 right-10 text-4xl text-white/5 group-hover:text-accent1/10 transition-colors"></i>
-            <div class="flex gap-1 mb-6">
-              <i class="fa-solid fa-star text-[10px] text-accent1"></i>
-              <i class="fa-solid fa-star text-[10px] text-accent1"></i>
-              <i class="fa-solid fa-star text-[10px] text-accent1"></i>
-              <i class="fa-solid fa-star text-[10px] text-accent1"></i>
-              <i class="fa-solid fa-star text-[10px] text-accent1"></i>
-            </div>
-            <p class="text-lg font-medium text-brandText leading-relaxed mb-10 italic">"Templates i savjeti za dobavljače su mi stvarno olakšali posao. Sad imam potpunu kontrolu."</p>
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 rounded-2xl bg-brand-gradient flex items-center justify-center font-black text-brandBg text-xs">A</div>
-              <div>
-                <p class="font-black text-white text-sm">Ana</p>
-                <p class="text-[10px] text-brandMuted uppercase tracking-widest font-bold">Verifikovan Član</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="min-w-[340px] md:min-w-[420px] glass p-10 rounded-[3rem] snap-center border border-white/5 relative group">
-            <i class="fa-solid fa-quote-left absolute top-10 right-10 text-4xl text-white/5 group-hover:text-accent1/10 transition-colors"></i>
-            <div class="flex gap-1 mb-6">
-              <i class="fa-solid fa-star text-[10px] text-accent1"></i>
-              <i class="fa-solid fa-star text-[10px] text-accent1"></i>
-              <i class="fa-solid fa-star text-[10px] text-accent1"></i>
-              <i class="fa-solid fa-star text-[10px] text-accent1"></i>
-              <i class="fa-solid fa-star text-[10px] text-accent1"></i>
-            </div>
-            <p class="text-lg font-medium text-brandText leading-relaxed mb-10 italic">"Kratko, jasno i praktično — odmah sam mogao primijeniti naučeno. Preporuka svima!"</p>
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 rounded-2xl bg-brand-gradient flex items-center justify-center font-black text-brandBg text-xs">I</div>
-              <div>
-                <p class="font-black text-white text-sm">Ivan</p>
-                <p class="text-[10px] text-brandMuted uppercase tracking-widest font-bold">Verifikovan Član</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- FAQ -->
-    <section id="faq" class="py-16 md:py-24 px-4 md:px-6">
-      <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-20 space-y-4">
-          <h2 class="text-4xl font-black italic">Imaš Pitanja?</h2>
-          <p class="text-brandMuted font-medium">Sve što trebaš znati prije nego što napraviš prvi korak.</p>
-        </div>
-        <div class="space-y-4">
-          <div class="faq-item glass rounded-[2rem] p-6 transition-all duration-500 group border border-white/5 hover:border-white/20">
-            <div class="flex items-center justify-between">
-              <h3 class="font-bold text-lg text-white">Je li ovo legalno?</h3>
-              <div class="faq-icon w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 bg-white/5 text-brandMuted group-hover:bg-white/10">
-                <i class="fa-solid fa-chevron-down text-sm"></i>
-              </div>
-            </div>
-            <div class="faq-answer text-brandMuted text-base leading-relaxed border-t border-white/5 pt-4">Da — program uči etičkim i legalnim metodama. Ne podržavamo niti promoviramo kršenje intelektualnog vlasništva.</div>
-          </div>
-
-          <div class="faq-item glass rounded-[2rem] p-6 transition-all duration-500 group border border-white/5 hover:border-white/20">
-            <div class="flex items-center justify-between">
-              <h3 class="font-bold text-lg text-white">Kako se plaća?</h3>
-              <div class="faq-icon w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 bg-white/5 text-brandMuted group-hover:bg-white/10">
-                <i class="fa-solid fa-chevron-down text-sm"></i>
-              </div>
-            </div>
-            <div class="faq-answer text-brandMuted text-base leading-relaxed border-t border-white/5 pt-4">Plaćanje se obavlja preko Stripe Payment Links ili PayPal linkova koje postavite u kodu.</div>
-          </div>
-
-          <div class="faq-item glass rounded-[2rem] p-6 transition-all duration-500 group border border-white/5 hover:border-white/20">
-            <div class="flex items-center justify-between">
-              <h3 class="font-bold text-lg text-white">Je li potrebno iskustvo?</h3>
-              <div class="faq-icon w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 bg-white/5 text-brandMuted group-hover:bg-white/10">
-                <i class="fa-solid fa-chevron-down text-sm"></i>
-              </div>
-            </div>
-            <div class="faq-answer text-brandMuted text-base leading-relaxed border-t border-white/5 pt-4">Nije — program vodi od osnova do naprednih taktika.</div>
-          </div>
-
-          <div class="faq-item glass rounded-[2rem] p-6 transition-all duration-500 group border border-white/5 hover:border-white/20">
-            <div class="flex items-center justify-between">
-              <h3 class="font-bold text-lg text-white">Koliko traje kurs?</h3>
-              <div class="faq-icon w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 bg-white/5 text-brandMuted group-hover:bg-white/10">
-                <i class="fa-solid fa-chevron-down text-sm"></i>
-              </div>
-            </div>
-            <div class="faq-answer text-brandMuted text-base leading-relaxed border-t border-white/5 pt-4">Kurs traje oko 8 tjedana uz prosječno vrijeme učenja 3-5 sati tjedno.</div>
-          </div>
-
-          <div class="faq-item glass rounded-[2rem] p-6 transition-all duration-500 group border border-white/5 hover:border-white/20">
-            <div class="flex items-center justify-between">
-              <h3 class="font-bold text-lg text-white">Koje alate trebam?</h3>
-              <div class="faq-icon w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 bg-white/5 text-brandMuted group-hover:bg-white/10">
-                <i class="fa-solid fa-chevron-down text-sm"></i>
-              </div>
-            </div>
-            <div class="faq-answer text-brandMuted text-base leading-relaxed border-t border-white/5 pt-4">Samo računalni preglednik i internet veza. Sve ostalo je uključeno u kurs.</div>
-          </div>
-
-          <div class="faq-item glass rounded-[2rem] p-6 transition-all duration-500 group border border-white/5 hover:border-white/20">
-            <div class="flex items-center justify-between">
-              <h3 class="font-bold text-lg text-white">Postoji li podrška?</h3>
-              <div class="faq-icon w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 bg-white/5 text-brandMuted group-hover:bg-white/10">
-                <i class="fa-solid fa-chevron-down text-sm"></i>
-              </div>
-            </div>
-            <div class="faq-answer text-brandMuted text-base leading-relaxed border-t border-white/5 pt-4">Da, nudimo podršku putem emaila i zajednice članova.</div>
-          </div>
-
-          <div class="faq-item glass rounded-[2rem] p-6 transition-all duration-500 group border border-white/5 hover:border-white/20">
-            <div class="flex items-center justify-between">
-              <h3 class="font-bold text-lg text-white">Da li dobijem certifikat?</h3>
-              <div class="faq-icon w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 bg-white/5 text-brandMuted group-hover:bg-white/10">
-                <i class="fa-solid fa-chevron-down text-sm"></i>
-              </div>
-            </div>
-            <div class="faq-answer text-brandMuted text-base leading-relaxed border-t border-white/5 pt-4">Da, nakon završetka kursa dobijete digitalni certifikat o završenom programu.</div>
-          </div>
-
-          <div class="faq-item glass rounded-[2rem] p-6 transition-all duration-500 group border border-white/5 hover:border-white/20">
-            <div class="flex items-center justify-between">
-              <h3 class="font-bold text-lg text-white">Što ako propustim lekciju?</h3>
-              <div class="faq-icon w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 bg-white/5 text-brandMuted group-hover:bg-white/10">
-                <i class="fa-solid fa-chevron-down text-sm"></i>
-              </div>
-            </div>
-            <div class="faq-answer text-brandMuted text-base leading-relaxed border-t border-white/5 pt-4">Sve lekcije su snimljene i dostupne trajno, tako da možete nadoknaditi propušteno.</div>
-          </div>
-
-          <div class="faq-item glass rounded-[2rem] p-6 transition-all duration-500 group border border-white/5 hover:border-white/20">
-            <div class="flex items-center justify-between">
-              <h3 class="font-bold text-lg text-white">Postoje li bonus materijali?</h3>
-              <div class="faq-icon w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 bg-white/5 text-brandMuted group-hover:bg-white/10">
-                <i class="fa-solid fa-chevron-down text-sm"></i>
-              </div>
-            </div>
-            <div class="faq-answer text-brandMuted text-base leading-relaxed border-t border-white/5 pt-4">Da, uključujemo dodatne vodiče, cheat sheetove i template-ove.</div>
-          </div>
-
-          <div class="faq-item glass rounded-[2rem] p-6 transition-all duration-500 group border border-white/5 hover:border-white/20">
-            <div class="flex items-center justify-between">
-              <h3 class="font-bold text-lg text-white">Može li kurs biti prilagođen meni?</h3>
-              <div class="faq-icon w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 bg-white/5 text-brandMuted group-hover:bg-white/10">
-                <i class="fa-solid fa-chevron-down text-sm"></i>
-              </div>
-            </div>
-            <div class="faq-answer text-brandMuted text-base leading-relaxed border-t border-white/5 pt-4">Da, možete pratiti vlastiti tempo i birati module po želji.</div>
-          </div>
-
-          <div class="faq-item glass rounded-[2rem] p-6 transition-all duration-500 group border border-white/5 hover:border-white/20">
-            <div class="flex items-center justify-between">
-              <h3 class="font-bold text-lg text-white">Kako mogu otkazati pretplatu?</h3>
-              <div class="faq-icon w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 bg-white/5 text-brandMuted group-hover:bg-white/10">
-                <i class="fa-solid fa-chevron-down text-sm"></i>
-              </div>
-            </div>
-            <div class="faq-answer text-brandMuted text-base leading-relaxed border-t border-white/5 pt-4">Pretplatu možete otkazati u bilo kojem trenutku putem postavki računa ili emaila podrške.</div>
-          </div>
-
-          <div class="faq-item glass rounded-[2rem] p-6 transition-all duration-500 group border border-white/5 hover:border-white/20">
-            <div class="flex items-center justify-between">
-              <h3 class="font-bold text-lg text-white">Da li su lekcije dostupne offline?</h3>
-              <div class="faq-icon w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 bg-white/5 text-brandMuted group-hover:bg-white/10">
-                <i class="fa-solid fa-chevron-down text-sm"></i>
-              </div>
-            </div>
-            <div class="faq-answer text-brandMuted text-base leading-relaxed border-t border-white/5 pt-4">Da, lekcije možete preuzeti za offline gledanje.</div>
-          </div>
-
-          <div class="faq-item glass rounded-[2rem] p-6 transition-all duration-500 group border border-white/5 hover:border-white/20">
-            <div class="flex items-center justify-between">
-              <h3 class="font-bold text-lg text-white">Jesu li sadržaji ažurirani?</h3>
-              <div class="faq-icon w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 bg-white/5 text-brandMuted group-hover:bg-white/10">
-                <i class="fa-solid fa-chevron-down text-sm"></i>
-              </div>
-            </div>
-            <div class="faq-answer text-brandMuted text-base leading-relaxed border-t border-white/5 pt-4">Da, redovno ažuriramo sadržaj prema najnovijim standardima i alatima.</div>
-          </div>
-        </div>
+    <section id="faq" class="py-32 px-6 max-w-3xl mx-auto w-full">
+      <div class="text-center mb-20 reveal">
+        <h2 class="text-4xl font-black italic text-white tracking-tighter">Sve što trebaš <span class="text-gradient">Znati</span></h2>
       </div>
-    </section>
-
-    <!-- CTA / CONTACT -->
-    <section id="contact" class="py-16 md:py-24 px-4 md:px-6 relative">
-       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-full max-h-[400px] bg-brand-gradient opacity-10 blur-[150px] -z-10"></div>
-       <div class="max-w-6xl mx-auto glass rounded-3xl md:rounded-[4rem] p-6 md:p-12 lg:p-20 text-center border border-accent1/20 relative overflow-hidden">
-          <div class="absolute top-0 right-0 w-32 h-32 bg-accent1/20 blur-3xl -z-10"></div>
-         <h2 class="text-3xl md:text-4xl lg:text-6xl font-black mb-6 md:mb-8 italic tracking-tighter">Ostani u <span class="text-gradient">Zoni.</span></h2>
-         <p class="text-brandMuted text-sm md:text-base lg:text-lg mb-8 md:mb-16 max-w-2xl mx-auto font-medium">Za sva pitanja oko plaćanja, onboardinga ili biznis saradnje, javi nam se direktno.</p>
-          
-          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <a href="mailto:romanoflipzone@gmail.com" class="p-8 rounded-[2.5rem] glass border border-white/5 hover:border-accent2/40 hover:bg-white/5 transition-all group">
-              <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:bg-accent2/10 transition-all">
-                <i class="fa-solid fa-envelope text-2xl text-accent2"></i>
-              </div>
-              <h4 class="text-[10px] font-black uppercase tracking-[0.2em] text-accent2 mb-2">Podrška E-Poštom</h4>
-              <p class="text-sm font-bold truncate">romanoflipzone@gmail.com</p>
-            </a>
-
-            <a href="https://t.me/flipzone" target="_blank" rel="noreferrer" class="p-8 rounded-[2.5rem] glass border border-white/5 hover:border-accent2/40 hover:bg-white/5 transition-all group">
-              <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:bg-accent2/10 transition-all">
-                <i class="fa-solid fa-paper-plane text-2xl text-accent2"></i>
-              </div>
-              <h4 class="text-[10px] font-black uppercase tracking-[0.2em] text-accent2 mb-2">Telegram Hub</h4>
-              <p class="text-sm font-bold truncate">@flipzone</p>
-            </a>
-
-            <a href="https://instagram.com/flipzone_balkan" target="_blank" rel="noreferrer" class="p-8 rounded-[2.5rem] glass border border-white/5 hover:border-accent2/40 hover:bg-white/5 transition-all group">
-              <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:bg-accent2/10 transition-all">
-                <i class="fa-solid fa-instagram text-2xl text-accent2"></i>
-              </div>
-              <h4 class="text-[10px] font-black uppercase tracking-[0.2em] text-accent2 mb-2">Instagram</h4>
-              <p class="text-sm font-bold truncate">@flipzone_balkan</p>
-            </a>
-
-            <a href="https://tiktok.com/@flipzone_balkan" target="_blank" rel="noreferrer" class="p-8 rounded-[2.5rem] glass border border-white/5 hover:border-accent2/40 hover:bg-white/5 transition-all group">
-              <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:bg-accent2/10 transition-all">
-                <i class="fa-solid fa-tiktok text-2xl text-accent2"></i>
-              </div>
-              <h4 class="text-[10px] font-black uppercase tracking-[0.2em] text-accent2 mb-2">TikTok</h4>
-              <p class="text-sm font-bold truncate">@flipzone_balkan</p>
-            </a>
-          </div>
-       </div>
+      <div id="faq-container" class="space-y-4"></div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="pt-16 md:pt-24 pb-8 md:pb-16 px-4 md:px-6 border-t border-white/5 mt-10 md:mt-20">
-      <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-        <div class="flex items-center gap-4">
-          <div class="w-12 h-12 rounded-2xl bg-brand-gradient flex items-center justify-center font-black text-brandBg text-xl shadow-lg shadow-accent2/30">FZ</div>
-          <div>
-            <h1 class="font-black text-xl tracking-tight text-white leading-none">FlipZone</h1>
-            <p class="text-[10px] text-brandMuted uppercase tracking-[0.2em] font-bold">Reselling</p>
-          </div>
+    <footer class="py-20 px-6 border-t border-white/5 text-center">
+      <div class="max-w-7xl mx-auto space-y-12">
+        <div class="flex items-center justify-center gap-4">
+          <div class="w-12 h-12 rounded-2xl bg-brand-gradient flex items-center justify-center font-black text-brandBg text-xl">FZ</div>
+          <span class="font-black text-3xl text-white italic tracking-tighter">FlipZone Balkan</span>
         </div>
-        <div class="md:text-right space-y-2">
-          <p class="text-sm font-medium text-brandMuted italic">"Tvoj profit je naša jedina metrika uspeha."</p>
-          <p class="text-[10px] font-black text-brandMuted uppercase tracking-[0.3em]">© 2026 FlipZone Balkan • Napravio romano</p>
-        </div>
+        <p class="text-[10px] font-black text-brandMuted uppercase tracking-[0.6em]">© 2026 FlipZone Balkan • Premium Reselling Ecosystem</p>
       </div>
     </footer>
   </div>
 
-  <script>
-    // Load products from JSON
-    const VENDORS_DATA = [
-      {
-        "id": "vip",
-        "name": "FlipZone - VIP Grupa",
-        "description": "Pristup grupi i svim dobavljačima.",
-        "price": "50€",
-        "category": "ostalo",
-        "image": "logo.png",
-        "stripeLink": "https://buy.stripe.com/6oUcN57FO7cm4lefmK8k802"
-      },
-      {
-        "id": "airpods",
-        "name": "AirPods Pro Dobavljač",
-        "description": "Pristup provjerenom dobavljaču AirPods Pro.",
-        "price": "5.99€",
-        "category": "elektronika",
-        "image": "slike/dobavljaci/airpods.png",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "applewatch",
-        "name": "Apple Watch Dobavljač",
-        "description": "Serija 7/8/Ultra dobavljač.",
-        "price": "5.99€",
-        "category": "satovi",
-        "image": "slike/dobavljaci/satap.png",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "iphone",
-        "name": "iPhone Dobavljač",
-        "description": "Novi i obnovljeni modeli.",
-        "price": "5.99€",
-        "category": "elektronika",
-        "image": "slike/dobavljaci/iphone.png",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "ps5",
-        "name": "PS5 Dobavljač",
-        "description": "Konzole i kontroleri.",
-        "price": "5.99€",
-        "category": "elektronika",
-        "image": "slike/dobavljaci/ps5.png",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "niketnVendor",
-        "name": "Nike TN Dobavljač",
-        "description": "Popularne TN-ice, razne boje.",
-        "price": "5.99€",
-        "category": "obuca",
-        "image": "slike/dobavljaci/niketn.png",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "niketechtleece",
-        "name": "Nike Tech Fleece Dobavljač",
-        "description": "Trenirka setovi.",
-        "price": "5.99€",
-        "category": "odjeca",
-        "image": "slike/dobavljaci/nikesportsweartechfleecewindrunnerfull-ziphoodielightgreyfrontlodzpolskanhype.webp",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "rolex",
-        "name": "Rolex Dobavljač",
-        "description": "Submariner, Datejust modeli.",
-        "price": "5.99€",
-        "category": "satovi",
-        "image": "slike/dobavljaci/rolex-png-pic.png",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "jblspeaker",
-        "name": "JBL Speaker Dobavljač",
-        "description": "Bluetooth zvučnici raznih modela.",
-        "price": "5.99€",
-        "category": "elektronika",
-        "image": "slike/dobavljaci/jbl-audio-speakers-transparent-png.png",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "monclerj",
-        "name": "Moncler Jacket Dobavljač",
-        "description": "Jakne i zimska odjeća.",
-        "price": "5.99€",
-        "category": "odjeca",
-        "image": "slike/dobavljaci/erasebg-transformed.webp",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "nintendoswitch",
-        "name": "Nintendo Switch Dobavljač",
-        "description": "Konzola i igre dostupne.",
-        "price": "5.99€",
-        "category": "elektronika",
-        "image": "slike/dobavljaci/ivg-smart-5500-banana-ice_63ebd95a-d19a-4aae-a787-f4d3aa9569af.webp",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "smartwatch",
-        "name": "Smart Watch Dobavljač",
-        "description": "Pametni satovi raznih brendova.",
-        "price": "5.99€",
-        "category": "satovi",
-        "image": "slike/dobavljaci/smartwatch.png",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "nikeairforce1",
-        "name": "Nike Air Force 1 Dobavljač",
-        "description": "Klasični Air Force 1 modeli.",
-        "price": "5.99€",
-        "category": "obuca",
-        "image": "slike/dobavljaci/force.png",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "adidasyeezy",
-        "name": "Adidas Yeezy Dobavljač",
-        "description": "Kanye West kolekcija.",
-        "price": "5.99€",
-        "category": "obuca",
-        "image": "slike/dobavljaci/adidas-yeezy-boost-350-v2-oreo-wethenew1.webp",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "jordan1",
-        "name": "Air Jordan 1 Dobavljač",
-        "description": "Ikoničke Jordan 1 patike.",
-        "price": "5.99€",
-        "category": "obuca",
-        "image": "slike/dobavljaci/air-jordan-1-retro-chicago-release-date.avif",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "newbalance",
-        "name": "New Balance Dobavljač",
-        "description": "Patike za sve aktivnosti.",
-        "price": "5.99€",
-        "category": "obuca",
-        "image": "slike/dobavljaci/pngimg.com - running_shoes_png5792.png",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "dunklow",
-        "name": "Nike Dunk Low Dobavljač",
-        "description": "Dunk Low patike.",
-        "price": "5.99€",
-        "category": "obuca",
-        "image": "slike/dobavljaci/nike+dunk+low+retro.png",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "puff",
-        "name": "Puffins Jacket Dobavljač",
-        "description": "Topla zimska odjeća.",
-        "price": "5.99€",
-        "category": "odjeca",
-        "image": "slike/dobavljaci/blue_t_shirt_png_clipart-2346.png",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "stoneisland",
-        "name": "Stone Island Dobavljač",
-        "description": "Premium odjeća i dodatci.",
-        "price": "5.99€",
-        "category": "odjeca",
-        "image": "slike/dobavljaci/erasebg-transformed.png",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "thenorthface",
-        "name": "The North Face Dobavljač",
-        "description": "Outdoor i outdoor oprema.",
-        "price": "5.99€",
-        "category": "odjeca",
-        "image": "slike/dobavljaci/the_north_face.png",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "palmangels",
-        "name": "Palm Angels Dobavljač",
-        "description": "Luksuzna odjeća i dodatci.",
-        "price": "5.99€",
-        "category": "odjeca",
-        "image": "slike/dobavljaci/nt.png",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "casiogshock",
-        "name": "Casio G-Shock Dobavljač",
-        "description": "Čvrsti i pouzdani satovi.",
-        "price": "5.99€",
-        "category": "satovi",
-        "image": "slike/dobavljaci/ga-2140re-1aer.png",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "pandora",
-        "name": "Pandora Dobavljač",
-        "description": "Nakit i dekorativni predmeti.",
-        "price": "5.99€",
-        "category": "ostalo",
-        "image": "slike/dobavljaci/53226-pandora-naramok-puzzle-piece-hearts-friendship-m-590728-792239c01.png",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "supreme",
-        "name": "Supreme Dobavljač",
-        "description": "Streetwear i kolaboracije.",
-        "price": "5.99€",
-        "category": "odjeca",
-        "image": "slike/dobavljaci/supreme-logo.png",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "offwhite",
-        "name": "Off-White Dobavljač",
-        "description": "Dizajnerska odjeća.",
-        "price": "5.99€",
-        "category": "odjeca",
-        "image": "slike/dobavljaci/off-white-emblem.png",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      },
-      {
-        "id": "luxuryperfume",
-        "name": "Luxury Perfume Dobavljač",
-        "description": "Ekskluzivni mirisi.",
-        "price": "5.99€",
-        "category": "ostalo",
-        "image": "slike/dobavljaci/eros_parfum_100ml-removebg-preview-1.png",
-        "stripeLink": "https://buy.stripe.com/7sY4gz8JSbsC7xqfmK8k803"
-      }
-    ];
+  <!-- MODERN REVIEW LIGHTBOX (SLIDE) -->
+  <div id="reviewModal" class="hidden fixed inset-0 z-[120] bg-brandBg/95 backdrop-blur-2xl flex items-center justify-center p-4 sm:p-10" onclick="if(event.target === this) window.closeReviewModal();">
+    <div class="relative w-full max-w-5xl glass bg-[#0a0c14] border-white/10 rounded-[2.5rem] overflow-hidden flex flex-col lg:flex-row shadow-[0_100px_100px_-50px_rgba(0,0,0,0.8)] animate-[scale-in_0.4s_ease-out]">
+      
+      <!-- Close Button -->
+      <button class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/5 text-white/40 flex items-center justify-center text-2xl z-20 hover:text-white transition-all" onclick="window.closeReviewModal();">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
 
-    function renderProducts() {
-      const grid = document.getElementById('products-grid');
-      if (!grid) return;
+      <!-- Image Column -->
+      <div class="w-full lg:w-3/5 h-[40vh] lg:h-[70vh] bg-black/40 flex items-center justify-center p-6 relative">
+        <img id="modalReviewImage" src="" class="max-w-full max-h-full object-contain drop-shadow-2xl" alt="Profit Proof" />
+        <div class="absolute bottom-6 left-6 px-4 py-2 rounded-xl glass bg-accent1/10 border-accent1/20 flex items-center gap-2">
+           <i class="fa-solid fa-circle-check text-accent1 text-xs"></i>
+           <span class="text-[10px] font-black text-white uppercase tracking-widest">Dokaz verificiran</span>
+        </div>
+      </div>
 
-      grid.innerHTML = '';
+      <!-- Content Column -->
+      <div class="w-full lg:w-2/5 p-10 sm:p-14 flex flex-col justify-center space-y-8 bg-gradient-to-br from-white/[0.02] to-transparent">
+        <div id="modalReviewStars" class="flex gap-1"></div>
+        
+        <div class="space-y-4">
+          <p id="modalReviewText" class="text-2xl sm:text-3xl font-medium text-brandText leading-snug italic tracking-tight"></p>
+        </div>
 
-      VENDORS_DATA.forEach((vendor) => {
-        const isVIP = vendor.id === 'vip';
-        const card = document.createElement('div');
-        card.className = `flex flex-col h-full rounded-[2.5rem] transition-all duration-500 relative group ${isVIP ? 'scale-105 z-10 shadow-[0_30px_60px_-12px_rgba(110,231,183,0.3)]' : 'hover:-translate-y-2'}`;
+        <div class="pt-8 border-t border-white/5 flex items-center gap-6">
+          <div id="modalReviewInitial" class="w-16 h-16 rounded-2xl bg-brand-gradient flex items-center justify-center font-black text-brandBg text-xl shadow-xl"></div>
+          <div>
+            <p id="modalReviewName" class="font-black text-2xl text-white italic tracking-tight"></p>
+            <p id="modalReviewRole" class="text-[10px] text-accent1 uppercase font-black tracking-[0.3em] mt-1"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        const glassDiv = document.createElement('div');
-        glassDiv.className = `flex flex-col h-full p-6 glass rounded-[2.5rem] border ${isVIP ? 'border-accent1/30 bg-accent1/[0.03]' : 'border-white/5'}`;
-
-        let content = '';
-
-        if (isVIP) {
-          content += `<div class="absolute -top-4 left-1/2 -translate-x-1/2 px-6 py-1.5 rounded-full bg-brand-gradient text-brandBg text-[10px] font-black uppercase tracking-[0.2em] shadow-xl whitespace-nowrap">
-            Najtraženije
-          </div>`;
-        }
-
-        content += `
-          <div class="aspect-square rounded-[2rem] overflow-hidden mb-6 relative flex items-center justify-center bg-white/3">
-            <img src="${vendor.image}" alt="${vendor.name}" class="max-w-full max-h-full object-contain object-center group-hover:scale-105 transition-transform duration-700" onerror="this.src='slike/dobavljaci/air-jordan-1-retro-chicago-release-date.avif'" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            <div class="absolute bottom-4 left-4 right-4">
-              <span class="px-3 py-1 rounded-lg bg-black/40 backdrop-blur-md border border-white/10 text-[10px] font-black uppercase text-white tracking-widest">${vendor.category}</span>
+  <!-- ULTRA COMPACT CHECKOUT MODAL -->
+  <div id="checkoutOverlay" class="fixed inset-0 z-[105] bg-black/95 backdrop-blur-sm items-end sm:items-center justify-center" onclick="if(event.target === this) window.closeCheckout();">
+    <div id="checkoutSheet" class="modal-sheet fixed bottom-0 left-0 w-full glass bg-[#05060d]/98 border-t sm:border border-white/10 flex flex-col rounded-t-[2.5rem] sm:rounded-[2rem] shadow-[0_40px_80px_-15px_rgba(0,0,0,1)]">
+      <!-- Tiny handle mobile -->
+      <div class="pt-3 pb-1 sm:hidden flex justify-center">
+        <div class="w-8 h-1 bg-white/10 rounded-full"></div>
+      </div>
+      <!-- Checkout Header -->
+      <div class="flex items-center justify-between px-6 py-4 border-b border-white/5 bg-white/[0.01]">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-brand-gradient flex items-center justify-center font-black text-brandBg text-[10px]">FZ</div>
+          <h2 class="text-md font-black text-white italic tracking-tight leading-none">Checkout</h2>
+        </div>
+        <button onclick="window.closeCheckout();" class="w-8 h-8 rounded-full flex items-center justify-center bg-white/5 text-white/40 hover:text-white transition-all">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+      <!-- Main Content Area - COMPACT -->
+      <div class="flex-1 overflow-y-auto no-scrollbar px-6 py-4 space-y-6">
+        <!-- Product Item (Horizontal & Compact) -->
+        <div class="flex items-center justify-between p-4 rounded-2xl bg-white/[0.03] border border-white/5">
+          <div class="flex items-center gap-4 min-w-0">
+            <div class="w-14 h-14 rounded-xl bg-brandBg border border-white/5 flex items-center justify-center p-2">
+              <img id="checkoutProductImage" src="" class="max-w-full max-h-full object-contain" alt="Proizvod">
+            </div>
+            <div class="min-w-0">
+              <h3 id="checkoutTitle" class="text-sm font-black text-white italic truncate leading-tight"></h3>
+              <span class="text-[8px] text-accent1 font-bold uppercase tracking-widest mt-1 block">Digital Delivery</span>
             </div>
           </div>
-
-          <div class="flex-1 flex flex-col">
-            <h3 class="text-xl font-extrabold text-white mb-2 leading-tight">${vendor.name}</h3>
-            <p class="text-sm text-brandMuted font-medium mb-6 flex-1">${vendor.description}</p>
-            
-            <div class="flex items-center justify-between mb-6">
-              <div class="flex flex-col">
-                <span class="text-[10px] font-black text-brandMuted uppercase tracking-widest">Cena</span>
-                <span class="text-3xl font-black text-white leading-none">${vendor.price}</span>
-              </div>
-              ${isVIP ? '<div class="text-accent1 text-xs font-bold italic underline">Lifetime Access</div>' : ''}
-            </div>
-
-            <a onclick="openCheckout('${vendor.name}', '${vendor.price}', '${vendor.description}', '${vendor.stripeLink}');" class="w-full py-4 rounded-2xl font-black text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-2 cursor-pointer ${isVIP ? 'bg-brand-gradient text-brandBg shadow-xl hover:shadow-2xl' : 'bg-white/5 text-white hover:bg-white/10 border border-white/5'}">
-              Kupi Dobavljača
-              <i class="fa-solid fa-shopping-cart text-[10px]"></i>
-            </a>
+          <div class="text-right pl-4">
+             <span id="checkoutSummaryTotal" class="text-xl font-black text-white tracking-tighter"></span>
+             <span class="text-[8px] text-brandMuted block font-bold">EUR</span>
           </div>
-        `;
+          <span id="checkoutSummarySubtotal" class="hidden"></span>
+          <span id="checkoutPrice" class="hidden"></span>
+        </div>
+        <!-- Payment Selection -->
+        <div class="space-y-3">
+          <p class="text-[9px] font-black text-white/30 uppercase tracking-[0.2em] ml-1">Plaćanje</p>
+          <div class="grid gap-2">
+            <label class="flex items-center gap-4 p-4 rounded-xl border border-accent1/30 bg-accent1/[0.03] cursor-pointer hover:bg-accent1/[0.06] transition-all group">
+               <input type="radio" name="payment" checked class="payment-option-radio">
+               <div class="flex-1">
+                 <span class="block text-xs font-black text-white italic">Kartica / Apple Pay</span>
+                 <span class="block text-[8px] text-brandMuted mt-0.5">Automatska isporuka</span>
+               </div>
+               <i class="fa-brands fa-cc-stripe text-xl text-accent1 opacity-80 group-hover:opacity-100"></i>
+            </label>
+            <label class="flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-white/[0.01] opacity-30 cursor-not-allowed">
+               <input type="radio" name="payment" disabled class="payment-option-radio">
+               <div class="flex-1">
+                 <span class="block text-xs font-black text-white/50 italic">Kripto Valute</span>
+                 <span class="block text-[8px] text-brandMuted/50 mt-0.5">Uskoro</span>
+               </div>
+               <i class="fa-brands fa-bitcoin text-lg text-white/20"></i>
+            </label>
+          </div>
+        </div>
+        <!-- Trust Stats Bar -->
+        <div class="flex items-center justify-between px-2 py-2 border-t border-white/5">
+           <div class="flex items-center gap-2">
+             <i class="fa-solid fa-shield-check text-accent1 text-[10px]"></i>
+             <span class="text-[8px] font-black text-white/30 uppercase tracking-widest">Secure SSL</span>
+           </div>
+           <div class="flex items-center gap-2">
+             <i class="fa-solid fa-bolt text-accent1 text-[10px]"></i>
+             <span class="text-[8px] font-black text-white/30 uppercase tracking-widest">Instant</span>
+           </div>
+           <div class="flex items-center gap-2">
+             <i class="fa-solid fa-headset text-accent1 text-[10px]"></i>
+             <span class="text-[8px] font-black text-white/30 uppercase tracking-widest">24/7 Support</span>
+           </div>
+        </div>
+      </div>
+      <!-- Compact Footer Action -->
+      <div class="p-6 pt-2 bg-[#05060d]">
+        <button onclick="window.processCheckout();" class="h-14 w-full rounded-xl bg-brand-gradient text-brandBg font-black text-md italic tracking-tighter shadow-xl btn-active transition-all flex items-center justify-center gap-3">
+          POTVRDI UPLATU <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </button>
+        <p class="text-center text-[7px] text-brandMuted/30 mt-3 uppercase font-black tracking-widest">Verified Merchant by Stripe</p>
+      </div>
+    </div>
+  </div>
 
-        glassDiv.innerHTML = content;
-        card.appendChild(glassDiv);
-        grid.appendChild(card);
-      });
-    }
-
-    // Render products when DOM is ready
-    document.addEventListener('DOMContentLoaded', renderProducts);
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', renderProducts);
-    } else {
-      renderProducts();
-    }
-
-    // Scroll navbar effect
-    window.addEventListener('scroll', function() {
-      const navbar = document.getElementById('navbar');
-      if (window.scrollY > 50) {
-        navbar.classList.remove('bg-transparent', 'py-8');
-        navbar.classList.add('glass-dark', 'py-4');
-      } else {
-        navbar.classList.remove('glass-dark', 'py-4');
-        navbar.classList.add('bg-transparent', 'py-8');
-      }
-    });
-
-    // FAQ accordion
-    document.querySelectorAll('.faq-item').forEach(item => {
-      item.addEventListener('click', function() {
-        document.querySelectorAll('.faq-item').forEach(i => {
-          if(i !== this) i.classList.remove('open');
-        });
-        this.classList.toggle('open');
-      });
-    });
-
-    // Lightbox functions
-    function openLightbox(imageSrc) {
-      const modal = document.getElementById('lightboxModal');
-      const img = document.getElementById('lightboxImage');
-      img.src = imageSrc;
-      modal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-      const modal = document.getElementById('lightboxModal');
-      modal.classList.add('hidden');
-      document.body.style.overflow = 'auto';
-    }
-
-    // Checkout functions
-    let currentCheckoutLink = '';
-
-    function openCheckout(name, price, desc, stripeLink) {
-      const modal = document.getElementById('checkoutModal');
-      document.getElementById('checkoutTitle').textContent = name;
-      document.getElementById('checkoutPrice').textContent = price;
-      document.getElementById('checkoutDesc').textContent = desc;
-      document.getElementById('summaryPrice').textContent = price;
-      document.getElementById('totalPrice').textContent = price;
-      currentCheckoutLink = stripeLink;
-      modal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeCheckout() {
-      const modal = document.getElementById('checkoutModal');
-      modal.classList.add('hidden');
-      document.body.style.overflow = 'auto';
-    }
-
-    function processCheckout() {
-      // Otvori Stripe link u novom prozoru
-      window.open(currentCheckoutLink, '_blank');
-    }
-
-    // Close lightbox with ESC key
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'Escape') {
-        closeLightbox();
-        closeCheckout();
-      }
-    });
-  </script>
+  <script type="module" src="/index.ts"></script>
 </body>
 </html>
