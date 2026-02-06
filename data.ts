@@ -266,10 +266,30 @@ export const VENDORS_DATA = [
 ];
 
 export const ROADMAP_STEPS = [
-  { id: "01", title: "Setup", desc: "Instalacija potrebnih alata i postavljanje tvog prvog online shopa bez troškova.", icon: "fa-gear" },
-  { id: "02", title: "Sourcing", desc: "Povezivanje s našim privatnim dobavljačima i odabir pobjedničkih proizvoda.", icon: "fa-box-open" },
-  { id: "03", title: "Marketing", desc: "Kreiranje viralnog contenta za TikTok i IG koji sam prodaje tvoje artikle.", icon: "fa-clapperboard" },
-  { id: "04", title: "Scale", desc: "Automatizacija narudžbi i širenje na cijeli Balkan i Europu uz našu pomoć.", icon: "fa-rocket" }
+  { 
+    id: "01", 
+    title: "Setup", 
+    desc: "Postavljanje osnovnog reselling sistema: odabir platforme za prodaju, izrada prvih oglasa i priprema za komunikaciju s kupcima.", 
+    icon: "fa-gear" 
+  },
+  { 
+    id: "02", 
+    title: "Sourcing", 
+    desc: "Povezivanje s provjerenim dobavljačima, odabir proizvoda s realnom potražnjom i upute kako napraviti sigurnu prvu narudžbu.", 
+    icon: "fa-box-open" 
+  },
+  { 
+    id: "03", 
+    title: "Sales & Marketing", 
+    desc: "Kreiranje oglasa i sadržaja koji privlači kupce (Marketplace, Vinted, TikTok, Instagram) bez bacanja novca na reklame.", 
+    icon: "fa-clapperboard" 
+  },
+  { 
+    id: "04", 
+    title: "Scale", 
+    desc: "Povećavanje količina, optimizacija cijena i širenje prodaje uz provjerene metode i podršku zajednice.", 
+    icon: "fa-rocket" 
+  }
 ];
 
 export const REVIEWS_DATA = [
@@ -279,15 +299,15 @@ export const REVIEWS_DATA = [
     text: "Kurikulum je stvarno detaljan — uspio sam pokrenuti prvi profitabilan listing u samo 30 dana.", 
     initial: "M", 
     stars: 5, 
-    image: '/slike/zarada/zarada1.png' 
+    image: "/slike/zarada/zarada1.png" 
   },
   { 
-    name: "Ana", 
+    name: "Nikola", 
     role: "Verifikovan Član", 
     text: "Templates i savjeti za dobavljače su mi stvarno olakšali posao. Sad imam potpunu kontrolu.", 
-    initial: "A", 
+    initial: "N", 
     stars: 5, 
-    image: '/slike/zarada/zarada2.png' 
+    image: "/slike/zarada/zarada2.png" 
   },
   { 
     name: "Ivan", 
@@ -295,7 +315,7 @@ export const REVIEWS_DATA = [
     text: "Kratko, jasno i praktično — odmah sam mogao primijeniti naučeno. Preporuka svima!", 
     initial: "I", 
     stars: 5, 
-    image: '/slike/zarada/zarada3.png' 
+    image: "/slike/zarada/zarada3.png" 
   },
   { 
     name: "Luka", 
@@ -303,15 +323,15 @@ export const REVIEWS_DATA = [
     text: "Pronašao sam top dobavljače za AirPods. Zarada je već prešla 500€ mjesečno.", 
     initial: "L", 
     stars: 5, 
-    image: '/slike/zarada/zarada4.png' 
+    image: "/slike/zarada/zarada4.png" 
   },
   { 
-    name: "Petra", 
+    name: "Petar", 
     role: "Verifikovan Član", 
     text: "Sve pohvale za podršku! Uvijek odgovore na svako pitanje u roku od par minuta.", 
     initial: "P", 
     stars: 5, 
-    image: '/slike/zarada/zarada5.png' 
+    image: "/slike/zarada/zarada5.png" 
   },
   { 
     name: "Dario", 
@@ -319,7 +339,89 @@ export const REVIEWS_DATA = [
     text: "Nisam vjerovao dok nisam prodao prvi set. Sad mi je ovo primarni izvor zarade.", 
     initial: "D", 
     stars: 5, 
-    image: '/slike/zarada/zadovoljan1.png' 
+    image: "/slike/zarada/zarada6.png" 
+  },
+
+  // NOVI (10+)
+  { 
+    name: "Antonio", 
+    role: "Aktivni Reseller", 
+    text: "Prva test narudžba prošla savršeno. Već planiram povećati količine.", 
+    initial: "A", 
+    stars: 5, 
+    image: "/slike/zarada/zarada7.png" 
+  },
+  { 
+    name: "Filip", 
+    role: "Verifikovan Član", 
+    text: "Dobavljači su legit i upute su jasne. Nema lutanja ni gubljenja vremena.", 
+    initial: "F", 
+    stars: 5, 
+    image: "/slike/zarada/zarada8.png" 
+  },
+  { 
+    name: "Tomislav", 
+    role: "VIP Member", 
+    text: "Napokon sam shvatio što prodavati i gdje. Rezultati su krenuli odmah.", 
+    initial: "T", 
+    stars: 5, 
+    image: "/slike/zarada/zarada9.png" 
+  },
+  { 
+    name: "Karlo", 
+    role: "Aktivni Reseller", 
+    text: "Oglasi koje sam napravio po uputama prodaju se daleko brže nego prije.", 
+    initial: "K", 
+    stars: 5, 
+    image: "/slike/zarada/zarada10.png" 
+  },
+  { 
+    name: "Matija", 
+    role: "Verifikovan Član", 
+    text: "Sve je sistematizirano. Točno znaš koji je sljedeći korak.", 
+    initial: "M", 
+    stars: 5, 
+    image: "/slike/zarada/zarada11.png" 
+  },
+  { 
+    name: "Josip", 
+    role: "Aktivni Reseller", 
+    text: "Krenuo sam s malim budžetom i bez iskustva. Sad već imam stalne kupce.", 
+    initial: "J", 
+    stars: 5, 
+    image: "/slike/zarada/zarada12.png" 
+  },
+  { 
+    name: "Bruno", 
+    role: "VIP Member", 
+    text: "Najveća vrijednost je zajednica i brzi odgovori kad zapneš.", 
+    initial: "B", 
+    stars: 5, 
+    image: "/slike/zarada/zarada13.png" 
+  },
+  { 
+    name: "Kristijan", 
+    role: "Verifikovan Član", 
+    text: "Prestao sam raditi random greške koje me koštale novca.", 
+    initial: "K", 
+    stars: 5, 
+    image: "/slike/zarada/zarada14.png" 
+  },
+  { 
+    name: "Mario", 
+    role: "Aktivni Reseller", 
+    text: "Prodaja ide konstantno. Nije shema, nego realan sistem.", 
+    initial: "M", 
+    stars: 5, 
+    image: "/slike/zarada/zarada15.png" 
+  },
+  { 
+    name: "Robert", 
+    role: "VIP Member", 
+    text: "Vrijedi svake kune. Uštediš mjesece testiranja.", 
+    initial: "R", 
+    stars: 5, 
+    image: "/slike/zarada/zarada16.png" 
   }
 ];
 
@@ -333,10 +435,76 @@ export const MARQUEE_SALES = [
 ];
 
 export const FAQ_DATA = [
-  { q: "Je li ovo legalno?", a: "Da — program uči etičkim i legalnim metodama resellinga. Ne podržavamo niti promoviramo kršenje intelektualnog vlasništva, već edukujemo o tržišnim tokovima." },
-  { q: "Kako se vrši plaćanje?", a: "Sva plaćanja se obrađuju sigurno putem Stripe platforme koja podržava sve kreditne i debitne kartice, kao i Apple/Google Pay." },
-  { q: "Trebam li prethodno iskustvo?", a: "Apsolutno ne. Naša edukacija je osmišljena tako da te vodi od potpunog početnika do naprednog resellera u roku od par tjedana." },
-  { q: "Koliko brzo mogu očekivati profit?", a: "Ovo zavisi isključivo od tvog rada. Neki naši članovi su povratili investiciju već u prvih 7 dana, dok je prosjek oko 14-21 dan." },
-  { q: "Što dobijem u VIP grupi?", a: "VIP grupa uključuje pristup SVIM dobavljačima, video kursu, privatnom Discord serveru i svakodnevnim updateovima o najtraženijim artiklima." }
+  {
+    q: "Je li ovo legalno?",
+    a: "**Da — program uči etičkim i legalnim metodama resellinga. Ne podržavamo niti promoviramo kršenje intelektualnog vlasništva, već edukujemo o tržišnim tokovima.**",
+  },
+  {
+    q: "Kako se vrši plaćanje?",
+    a: "**Sva plaćanja se obrađuju sigurno putem Stripe platforme koja podržava sve kreditne i debitne kartice, kao i Apple/Google Pay.**",
+  },
+  {
+    q: "Trebam li prethodno iskustvo?",
+    a: "**Apsolutno ne. Naša edukacija je osmišljena tako da te vodi od potpunog početnika do naprednog resellera u roku od par tjedana.**",
+  },
+  {
+    q: "Koliko brzo mogu očekivati profit?",
+    a: "**Ovo zavisi isključivo od tvog rada. Neki naši članovi su povratili investiciju već u prvih 7 dana, dok je prosjek oko 14–21 dan.**",
+  },
+  {
+    q: "Što dobijem u VIP grupi?",
+    a: "**VIP grupa uključuje pristup SVIM dobavljačima, video kursu, privatnom Discord serveru i svakodnevnim updateovima o najtraženijim artiklima.**",
+  },
+
+  // NOVO (10+)
+  {
+    q: "Što dobivam kupovinom dobavljača?",
+    a: "**Dobivaš direktnu vezu s dobavljačem (kontakt/stranicu) + upute kako naručiti, koje količine uzimati i na što paziti da izbjegneš greške i gubitak novca.**",
+  },
+  {
+    q: "Dobijem li upute kako naručiti od dobavljača?",
+    a: "**Da. Uz dobavljača dobivaš jasne korake: kako se javiti, što pitati, kako dogovoriti cijenu, dostavu i plaćanje.**",
+  },
+  {
+    q: "Je li dobavljač provjeren?",
+    a: "**Da — navodimo dobavljače koji su provjereni kroz iskustva zajednice i realne narudžbe. I dalje preporučujemo da kreneš s manjom test narudžbom.**",
+  },
+  {
+    q: "Mogu li kupiti samo jednog dobavljača bez VIP grupe?",
+    a: "**Da. Možeš kupiti pojedinačnog dobavljača bez ulaska u VIP, ako ti je to trenutno dovoljno.**",
+  },
+  {
+    q: "Koje proizvode preporučujete za početak?",
+    a: "**Proizvode s velikom potražnjom i brzom prodajom: trend artikle, dodatke, sitnu elektroniku i stvari koje se lako šalju i ne zauzimaju puno prostora.**",
+  },
+  {
+    q: "Gdje se najbolje prodaje (Balkan/EU)?",
+    a: "**Najčešće: Facebook Marketplace, Vinted, OLX/Njuškalo i lokalne grupe. U VIP-u dobiješ i konkretne strategije za koji kanal je najbolji za koji tip proizvoda.**",
+  },
+  {
+    q: "Koliko mi novca treba za start?",
+    a: "**Možeš krenuti i s malim budžetom. Najpametnije je uzeti 1–2 test proizvoda, pa tek onda skalirati kad vidiš da prodaja ide.**",
+  },
+  {
+    q: "Koliko vremena dnevno treba?",
+    a: "**Realno 30–60 min dnevno za početak (objave, odgovori kupcima, dogovori). Kasnije, kad imaš sistem, ide brže.**",
+  },
+  {
+    q: "Što ako zapnem ili ne znam što dalje?",
+    a: "**U VIP grupi imaš podršku zajednice i administracije — dobiješ smjernice, provjere oglasa i prijedloge kako da poboljšaš prodaju.**",
+  },
+  {
+    q: "Dobivam li pristup odmah nakon plaćanja?",
+    a: "**Da — nakon kupnje te administracija kontaktira i dobiješ pristup / informacije u najkraćem roku (provjeri i Instagram Requests/Spam).**",
+  },
+  {
+    q: "Je li ovo “dropshipping”?",
+    a: "**Ne nužno. Reselling je preprodaja — možeš imati robu kod sebe ili raditi model po narudžbi, ovisno o strategiji. U edukaciji pokrivamo oba pristupa.**",
+  },
+  {
+    q: "Kako da izbjegnem najčešće greške početnika?",
+    a: "**Tako da ne ideš na sve odjednom: test narudžba, dobar oglas, realna marža, i fokus na proizvode koji se dokazano prodaju. To je glavna razlika između profita i bacanja novca.**",
+  },
 ];
+
 
