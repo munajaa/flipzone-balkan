@@ -10,6 +10,20 @@ import {
 export {};
 
 declare global {
+  interface Vendor {
+    id: string;
+    name: string;
+    description: string;
+    price: string;
+    originalPrice?: string;
+    discount?: number;
+    category: string;
+    image: string;
+    stripeLink: string;
+    isHot: boolean;
+    allVendors?: boolean;
+  }
+
   interface Window {
     openReviewModal: (index: number) => void;
     closeReviewModal: () => void;
@@ -79,8 +93,10 @@ function renderVendors() {
         <div class="absolute inset-0 bg-accent1/5 opacity-0 group-hover:opacity-100 blur-3xl transition-opacity duration-700"></div>
         <img src="${v.image}" class="relative z-10 max-w-full max-h-full object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.6)] group-hover:scale-110 transition-transform duration-700" alt="${v.name}" loading="lazy" />
         <div class="absolute top-5 left-5 flex flex-col gap-2 z-20">
-          ${v.isHot ? '<span class="px-3 py-1 bg-accent1 text-brandBg text-[8px] font-black uppercase tracking-[0.2em] rounded-full shadow-[0_0_20px_rgba(110,231,183,0.5)] animate-pulse">Top Choice</span>' : ''}
-          <span class="px-3 py-1 bg-white/10 backdrop-blur-md text-white/70 text-[7px] font-black uppercase tracking-[0.2em] rounded-full border border-white/10 inline-flex items-center gap-1"><i class="fa-solid fa-check-circle text-accent1"></i> Verified</span>
+          ${v.discount ? `<span class="px-3 py-1 bg-red-500/90 text-white text-[8px] font-black uppercase tracking-[0.2em] rounded-full shadow-[0_0_20px_rgba(239,68,68,0.6)] animate-pulse">-${v.discount}% POPUST</span>` : ''}
+          ${v.allVendors ? `<span class="px-3 py-1 bg-accent1 text-brandBg text-[8px] font-black uppercase tracking-[0.2em] rounded-full shadow-[0_0_20px_rgba(110,231,183,0.5)] animate-pulse inline-flex items-center gap-1"><i class="fa-solid fa-crown text-[10px]"></i> Svi izvori (26+)</span>` : ''}
+          ${v.isHot && !v.discount && !v.allVendors ? '<span class="px-3 py-1 bg-accent1 text-brandBg text-[8px] font-black uppercase tracking-[0.2em] rounded-full shadow-[0_0_20px_rgba(110,231,183,0.5)] animate-pulse">Top Choice</span>' : ''}
+          <span class="px-3 py-1 bg-white/10 backdrop-blur-md text-white/70 text-[7px] font-black uppercase tracking-[0.2em] rounded-full border border-white/10 inline-flex items-center gap-1"><i class="fa-solid fa-circle-check text-accent1"></i> Verified</span>
         </div>
       </div>
       <div class="p-6 pt-2 flex flex-col flex-1">
@@ -88,11 +104,21 @@ function renderVendors() {
           <span class="text-[9px] font-black text-accent2 uppercase tracking-[0.3em] opacity-80">${v.category}</span>
         </div>
         <h3 class="text-lg sm:text-xl font-black italic text-white leading-tight mb-2 group-hover:text-accent1 transition-colors">${v.name}</h3>
-        <p class="text-[11px] text-brandMuted leading-relaxed font-medium line-clamp-2 opacity-60 mb-6 group-hover:opacity-90 transition-opacity">${v.description}</p>
+        <p class="text-[11px] text-brandMuted leading-relaxed font-medium line-clamp-2 opacity-60 mb-4 group-hover:opacity-90 transition-opacity">${v.description}</p>
+        ${v.allVendors ? `
+          <div class="mb-4 space-y-1 text-[9px] text-accent1">
+            <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-accent1 text-[10px]"></i> <span>26+ Premium izvora</span></div>
+            <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-accent1 text-[10px]"></i> <span>Svi dobavljači dostupni</span></div>
+            <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-accent1 text-[10px]"></i> <span>24/7 podrška</span></div>
+          </div>
+        ` : ''}
         <div class="mt-auto pt-6 border-t border-white/5 flex items-center justify-between gap-4">
           <div class="flex flex-col">
             <span class="text-[8px] text-brandMuted font-black uppercase tracking-widest leading-none mb-1">Cijena</span>
-            <span class="text-2xl font-black text-white tracking-tighter">${v.price}</span>
+            <div class="flex items-baseline gap-2">
+              <span class="text-2xl font-black text-white tracking-tighter">${v.price}</span>
+              ${v.originalPrice ? `<span class="text-sm text-brandMuted line-through opacity-60">${v.originalPrice}</span>` : ''}
+            </div>
           </div>
           <button onclick="window.openCheckout('${v.name}', '${v.price}', '${v.description}', '${v.stripeLink}', '${v.image}')" 
                   class="h-12 w-12 sm:w-auto sm:px-6 rounded-xl bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest hover:bg-brand-gradient hover:text-brandBg hover:border-transparent transition-all btn-active flex items-center justify-center gap-2 group/btn shadow-xl">

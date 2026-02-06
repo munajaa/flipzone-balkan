@@ -3,12 +3,15 @@ export const VENDORS_DATA = [
   {
     id: "vip",
     name: "FlipZone - VIP Grupa",
-    description: "Kompletan pristup premium grupi, svim ažuriranim dobavljačima i 24/7 mentorskoj podršci.",
-    price: "50€",
+    description: "Kompletan pristup premium grupi, SVIM 26+ izvorima dobavljača i 24/7 mentorskoj podršci.",
+    price: "29,99€",
+    originalPrice: "50€",
+    discount: 40,
     category: "ostalo",
     image: "/slike/logo.png",
     stripeLink: "https://buy.stripe.com/6oUcN57FO7cm4lefmK8k802",
-    isHot: true
+    isHot: true,
+    allVendors: true
   },
   {
     id: "airpods",
